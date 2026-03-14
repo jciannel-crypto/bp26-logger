@@ -607,15 +607,115 @@
         <div class="field">
           <label>Public Signal</label>
           <select id="publicSignalType">
-            <option value="">Select...</option><option value="BALANCED">BALANCED</option><option value="HEAVY_FAV">HEAVY FAV</option>
-            <option value="HEAVY_DOG">HEAVY DOG</option><option value="EXTREME_TOTAL_OVER">EXTREME OVER</option>
-            <option value="EXTREME_TOTAL_UNDER">EXTREME UNDER</option><option value="RLM_SETUP">RLM SETUP</option><option value="LINE_FREEZE">LINE FREEZE</option>
+            <option value="">Select...</option>
+            <option value="TRUE_RLM">TRUE RLM — line moves against ticket %</option>
+            <option value="SHARP_MONEY_DIVERGENCE">SHARP MONEY DIVERGENCE — tickets vs money split</option>
+            <option value="POST_MOVE_PUBLIC_CHASE">POST MOVE PUBLIC CHASE — public chasing after move</option>
+            <option value="NEWS_REPRICE">NEWS REPRICE — injury/lineup drives move</option>
+            <option value="NO_SIGNAL">NO SIGNAL — no meaningful divergence</option>
+            <optgroup label="── Legacy (existing entries) ──">
+              <option value="BALANCED">BALANCED (legacy)</option>
+              <option value="HEAVY_FAV">HEAVY FAV (legacy)</option>
+              <option value="HEAVY_DOG">HEAVY DOG (legacy)</option>
+              <option value="EXTREME_TOTAL_OVER">EXTREME OVER (legacy)</option>
+              <option value="EXTREME_TOTAL_UNDER">EXTREME UNDER (legacy)</option>
+              <option value="RLM_SETUP">RLM SETUP (legacy)</option>
+            </optgroup>
           </select>
         </div>
       </div>
     </div>
   </div>
+<!-- 07b MARKET TIMING & SIGNAL QUALITY (v1.4) -->
+  <div class="section pre-game-section" id="sec07b">
+    <div class="section-header">
+      <span class="section-title">07b — Market Timing &amp; Signal Quality</span>
+      <span class="badge badge-opt">v1.4</span>
+    </div>
+    <div class="section-body">
 
+      <div class="field-row">
+        <div class="field">
+          <label>Move Phase <span class="opt">(when was signal observed?)</span></label>
+          <select id="movePhase">
+            <option value="">Select...</option>
+            <option value="PRE_NEWS">PRE NEWS — before any injury-related move</option>
+            <option value="NEWS_WINDOW">NEWS WINDOW — player Q, line actively moving</option>
+            <option value="POST_CONFIRMATION">POST CONFIRMATION — after injury confirmed OUT/Available</option>
+            <option value="N/A">N/A — non-injury signal</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Observed After Move? <span class="opt">(required: totals BET/SIM)</span></label>
+          <select id="observedAfterMove">
+            <option value="">Select...</option>
+            <option value="NO">NO — observed before primary move</option>
+            <option value="YES">YES — observed after primary move</option>
+            <option value="UNKNOWN">UNKNOWN</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Sharp Confirmed? <span class="opt">(optional)</span></label>
+          <select id="sharpConfirmed">
+            <option value="">Select...</option>
+            <option value="YES">YES — multi-book or sharp book confirms</option>
+            <option value="NO">NO</option>
+            <option value="UNCONFIRMED">UNCONFIRMED</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label>Line Move Size (pts) <span class="opt">(required: totals BET/SIM)</span></label>
+          <input type="number" id="lineMoveSize" step="0.5" min="0" placeholder="e.g. 3.5">
+        </div>
+        <div class="field">
+          <label>Totals Filter Flags</label>
+          <select id="totalsFilterFlags">
+            <option value="">None / N/A</option>
+            <option value="COMPRESSED">COMPRESSED — move ≥3.0 pts</option>
+            <option value="HIGH_BAND">HIGH BAND — total ≥232</option>
+            <option value="EFF_RISK">EFF RISK — top-10 offense present</option>
+            <option value="COMPRESSED,HIGH_BAND">COMPRESSED + HIGH BAND (2/3)</option>
+            <option value="COMPRESSED,EFF_RISK">COMPRESSED + EFF RISK (2/3)</option>
+            <option value="HIGH_BAND,EFF_RISK">HIGH BAND + EFF RISK (2/3)</option>
+            <option value="COMPRESSED,HIGH_BAND,EFF_RISK">ALL THREE — downgrade/PASS</option>
+          </select>
+          <div id="totalsFilterWarn" style="display:none;color:#C00000;font-weight:bold;font-size:11px;padding:4px 0;margin-top:4px;"></div>
+        </div>
+        <div class="field">
+          <label>SII Flag <span class="opt">(slate inflation index)</span></label>
+          <select id="siiFlag">
+            <option value="NORMAL">NORMAL</option>
+            <option value="SLATE_ANOMALY">SLATE ANOMALY — game vs slate direction</option>
+            <option value="SLATE_ANOMALY_RLM">SLATE ANOMALY RLM — anomaly + 70%+ public opposite</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label>Slate Inflation Index <span class="opt">(session-level: N_up/N_down/N_flat)</span></label>
+          <input type="text" id="slateInflationIndex" placeholder="e.g. 4/1/3">
+        </div>
+        <div class="field">
+          <label>Slate Consensus Direction <span class="opt">(session-level)</span></label>
+          <select id="slateConsensusDirection">
+            <option value="">Select...</option>
+            <option value="UP">UP</option>
+            <option value="DOWN">DOWN</option>
+            <option value="FLAT">FLAT</option>
+          </select>
+        </div>
+        <div class="field">
+          <div id="confirmPricingWarn" style="display:none;color:#C00000;font-weight:bold;font-size:11px;padding:4px;margin-top:18px;background:#fff0f0;border-radius:4px;"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  
   <!-- 08 INJURY MODULE -->
   <div class="section pre-game-section" id="sec08">
     <div class="section-header"><span class="section-title">08 — Injury Module</span><span class="badge badge-opt">OPTIONAL</span></div>
@@ -2454,6 +2554,15 @@ function collectForm(){
     injuryPlayers:collectPlayerRows(), // v3.5: per-player rows
     depletionAsymmetry:document.getElementById('depletionAsymmetry').value, // v3.5
     signalOrigin:document.getElementById('signalOrigin').value, // v3.5
+    // ── v1.4 Signal Taxonomy fields ──
+    movePhase:          document.getElementById('movePhase')?.value          || null,
+    observedAfterMove:  document.getElementById('observedAfterMove')?.value  || null,
+    sharpConfirmed:     document.getElementById('sharpConfirmed')?.value     || null,
+    lineMoveSize:       parseFloat(document.getElementById('lineMoveSize')?.value) || null,
+    totalsFilterFlags:  document.getElementById('totalsFilterFlags')?.value  || null,
+    siiFlag:            document.getElementById('siiFlag')?.value            || 'NORMAL',
+    slateInflationIndex:document.getElementById('slateInflationIndex')?.value|| null,
+    slateConsensusDirection:document.getElementById('slateConsensusDirection')?.value || null,
     signalWhat:document.getElementById('signalWhat').value,signalWhy:document.getElementById('signalWhy').value,
     signalInvalidates:document.getElementById('signalInvalidates').value,
     // ── Scoring raw inputs (floats) — juiceCents NOT stored (derived) ──
@@ -3215,6 +3324,43 @@ function toast(msg,type='success'){
 window.addEventListener('load',async()=>{
   initCal();const ts=await autoBackup();updateBackupStatus(ts);refreshLedger();updateBackupInfo();updateConfidence();
   await checkMigrationNeeded();
+});
+// ── v1.4 Totals Structure Filter + Confirmation Pricing auto-warn ──
+function v14_checkWarnings() {
+  const movePhase = document.getElementById('movePhase')?.value || '';
+  const totalsFlags = document.getElementById('totalsFilterFlags')?.value || '';
+
+  // Confirmation Pricing Test
+  const cpWarn = document.getElementById('confirmPricingWarn');
+  if (cpWarn) {
+    if (movePhase === 'POST_CONFIRMATION') {
+      cpWarn.textContent = '⚠ POST CONFIRMATION — Apply Confirmation Pricing Test. PASS unless second move present (Partially Priced).';
+      cpWarn.style.display = 'block';
+    } else {
+      cpWarn.style.display = 'none';
+    }
+  }
+
+  // Totals Structure Filter
+  const tfWarn = document.getElementById('totalsFilterWarn');
+  if (tfWarn) {
+    const flagCount = totalsFlags.split(',').filter(f => f && f !== 'None / N/A').length;
+    if (totalsFlags === 'COMPRESSED,HIGH_BAND,EFF_RISK') {
+      tfWarn.textContent = '⚠ ALL THREE TOTALS FILTERS ACTIVE — Auto-downgrade. PASS unless additional sharp confirmation present.';
+      tfWarn.style.display = 'block';
+    } else if (flagCount >= 2) {
+      tfWarn.textContent = '⚠ 2 of 3 Totals Filter conditions met — signal confidence downgraded automatically.';
+      tfWarn.style.display = 'block';
+    } else {
+      tfWarn.style.display = 'none';
+    }
+  }
+}
+
+// Wire up listeners
+document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('movePhase')?.addEventListener('change', v14_checkWarnings);
+  document.getElementById('totalsFilterFlags')?.addEventListener('change', v14_checkWarnings);
 });
 </script>
 </body>
