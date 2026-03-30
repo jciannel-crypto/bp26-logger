@@ -2583,10 +2583,9 @@ function collectForm(){
     invalidationHappened:document.getElementById('invalidationHappened').value,
     invalidationType:document.getElementById('invalidationType').value,
     failureMode:document.getElementById('failureMode').value,
-  var _vf = document.getElementById('varianceFlag');
-  var _fd = document.getElementById('failureDetail');
-  if(_vf !== null) entry.varianceFlag = _vf.checked;
-  if(_fd !== null) entry.failureDetail = _fd.value.trim();
+
+    varianceFlag: document.getElementById('varianceFlag') ? document.getElementById('varianceFlag').checked : false,
+    failureDetail: document.getElementById('failureDetail') ? (document.getElementById('failureDetail').value||'').trim() : '',
 
     learningNote:document.getElementById('learningNote').value,
     preGameNotes:document.getElementById('preGameNotes').value,
