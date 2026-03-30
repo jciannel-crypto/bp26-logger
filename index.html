@@ -1057,26 +1057,15 @@
       </div>
       <div class="field" style="margin-bottom:12px">
         <label>Failure Mode <span class="opt" id="failureModeHint">🔒 Unlocks post-game</span></label>
-        <select id="failureMode" disabled style="opacity:.35;cursor:not-allowed">
-          <option value="">— not set —</option>
-          <option value="EFFICIENCY_GT_PACE">EFFICIENCY_GT_PACE</option>
-          <option value="PACE_READ_WRONG">PACE_READ_WRONG</option>
-          <option value="SHOT_MAKING_VARIANCE">SHOT_MAKING_VARIANCE</option>
-          <option value="FOUL_FT_SPIKE">FOUL_FT_SPIKE</option>
-          <option value="TURNOVER_SWING">TURNOVER_SWING</option>
-          <option value="3PT_VOLUME_SPIKE">3PT_VOLUME_SPIKE</option>
-          <option value="INJURY_IMPACT_UNDERWEIGHTED">INJURY_IMPACT_UNDERWEIGHTED</option>
-          <option value="MINUTES_RESTRICTION_OVERRIDDEN">MINUTES_RESTRICTION_OVERRIDDEN</option>
-          <option value="BAD_NUMBER_BAD_PRICE">BAD_NUMBER_BAD_PRICE</option>
-          <option value="MARKET_SIGNAL_MISREAD">MARKET_SIGNAL_MISREAD</option>
-          <option value="OTHER">OTHER</option>
-        </select>
+        <select id="failureMode" class="field-input"><option value="">— Select failure mode —</option><option value="OUTLIER_EVENT">🔴 Outlier Event</option><option value="EXTREME_SCORING_RUN">🔴 Extreme Scoring Run</option><option value="TURNOVER_ANOMALY">🔴 Turnover Anomaly</option><option value="SHOOTING_VARIANCE_SPIKE">🔴 Shooting Variance Spike</option><option value="ONE_SIDE_HIT_OTHER_FAILED">🟡 One Side Hit, Other Failed</option><option value="PARTIAL_DEPLETION_MISS">🟡 Partial Depletion Miss</option><option value="PACE_MISREAD">🟡 Pace Misread</option><option value="NEWS_REPRICE_MISREAD">🔵 News Reprice Misread</option><option value="LATE_MOVE_MISSED">🔵 Late Move Missed</option><option value="EDGE_DECAYED_PRE_ENTRY">🔵 Edge Decayed Pre-Entry</option><option value="MECHANISM_INCORRECT">⚫ Mechanism Incorrect</option><option value="ASYMMETRY_FALSE">⚫ Asymmetry False</option><option value="CONFIRMATION_INVALID">⚫ Confirmation Invalid</option></select>
       </div>
       <div class="field">
         <label>Learning Note <span class="opt" id="learningNoteHint">🔒 Unlocks post-game — one sentence</span></label>
         <input type="text" id="learningNote" placeholder="One sentence — what this bet taught you" disabled style="opacity:.35;cursor:not-allowed">
       </div>
     </div>
+      <div class="field" id="failureDetailField"><label class="field-label" for="failureDetail">Failure Detail <span style="color:var(--red)">*</span><span class="hint">1–2 sentences. What caused the deviation from expected outcome?</span></label><textarea id="failureDetail" class="field-input" rows="2" maxlength="350" style="resize:none;font-family:inherit;" placeholder="e.g. TOR scored 139 on a historic 31-0 run off 28 ORL turnovers. ORL suppression held (87 pts); failure was exogenous TOR outlier."></textarea></div>
+      <div class="field" id="varianceFlagField" style="margin-top:8px"><label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:12px;color:var(--text2)"><input type="checkbox" id="varianceFlag" style="width:14px;height:14px;cursor:pointer"><span><strong>Variance Flag</strong> — mechanism correct, outcome deviated due to exogenous event</span></label></div>
   </div>
 
   <!-- LEGACY OVERRIDE TOGGLE -->
@@ -2594,6 +2583,11 @@ function collectForm(){
     invalidationHappened:document.getElementById('invalidationHappened').value,
     invalidationType:document.getElementById('invalidationType').value,
     failureMode:document.getElementById('failureMode').value,
+  var _vf = document.getElementById('varianceFlag');
+  var _fd = document.getElementById('failureDetail');
+  if(_vf !== null) entry.varianceFlag = _vf.checked;
+  if(_fd !== null) entry.failureDetail = _fd.value.trim();
+
     learningNote:document.getElementById('learningNote').value,
     preGameNotes:document.getElementById('preGameNotes').value,
     postGameNotes:document.getElementById('postGameNotes').value,
@@ -2618,6 +2612,18 @@ function onLegacyToggle(){
 }
 
 async function submitEntry(){
+  // BP26-SPEC-20260330-01: FMTS validation
+  var _dt = document.querySelector('input[name="decisionType"]:checked');
+  var _dtVal = _dt ? _dt.value : '';
+  var _res = (document.getElementById('result')||{}).value||'';
+  var _isLoss = _res.toLowerCase().indexOf('loss') > -1;
+  if((_dtVal==='SIM'||_dtVal==='BET') && _isLoss) {
+    var _fm = (document.getElementById('failureMode')||{}).value||'';
+    var _fd = ((document.getElementById('failureDetail')||{}).value||''). trim();
+    if(!_fm){toast('Failure Mode required for SIM/BET losses (BP26-SPEC-20260330-01)','error');return;}
+    if(!_fd||_fd.length<5){toast('Failure Detail required for SIM/BET losses','error');return;}
+  }
+
   if(postGameMode){
     // ══ POSTGAME HARD GATES (Enforcement §4) ═════════════
     if(!document.getElementById('finalScore').value.trim()){toast('[HARD STOP] Final Score required (§12)','error');return;}
