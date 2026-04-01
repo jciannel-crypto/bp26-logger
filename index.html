@@ -284,6 +284,167 @@
   .sd-validated{background:rgba(16,185,129,.12);color:var(--green);}
   .sd-rejected{background:rgba(239,68,68,.12);color:var(--red);}
 
+
+  /* ============================================================
+     BP26 VALIDATION LAYER v1.0 — BP26-SPEC-20260401-01
+     Corrections applied: 4/1/26
+     ============================================================ */
+
+  #validationPanel {
+    background: #1a1a2e;
+    border: 2px solid #e63946;
+    border-radius: 8px;
+    padding: 18px 20px;
+    margin: 18px 0;
+  }
+  #validationPanel.vp-pass {
+    border-color: #2ecc71;
+  }
+  #validationPanel h3 {
+    color: #e63946;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin: 0 0 14px 0;
+  }
+  #validationPanel.vp-pass h3 {
+    color: #2ecc71;
+  }
+  .vp-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px 16px;
+    margin-bottom: 12px;
+  }
+  .vp-field label {
+    display: block;
+    font-size: 11px;
+    color: #aaa;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .vp-field select {
+    width: 100%;
+    background: #0d0d1a;
+    color: #fff;
+    border: 1px solid #444;
+    border-radius: 4px;
+    padding: 6px 8px;
+    font-size: 13px;
+  }
+  .vp-field select:focus {
+    border-color: #4a9eff;
+    outline: none;
+  }
+  .vp-cvs-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px 12px;
+    background: #0d0d1a;
+    border: 1px solid #444;
+    border-radius: 4px;
+    margin-bottom: 14px;
+  }
+  .vp-cvs-row input[type=checkbox] {
+    margin-top: 2px;
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    accent-color: #2ecc71;
+  }
+  .vp-cvs-row label {
+    font-size: 12px;
+    color: #ccc;
+    cursor: pointer;
+    line-height: 1.4;
+  }
+  #vpValidateBtn {
+    background: #e63946;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 24px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom: 14px;
+    transition: background 0.2s;
+  }
+  #vpValidateBtn:hover {
+    background: #c1121f;
+  }
+  #vpStatusBar {
+    padding: 10px 14px;
+    border-radius: 5px;
+    font-size: 13px;
+    font-weight: 700;
+    text-align: center;
+    display: none;
+  }
+  #vpStatusBar.vp-status-pass {
+    background: #1a4731;
+    color: #2ecc71;
+    border: 1px solid #2ecc71;
+  }
+  #vpStatusBar.vp-status-fail {
+    background: #3d0b0b;
+    color: #e63946;
+    border: 1px solid #e63946;
+  }
+  #vpErrorList {
+    margin: 10px 0 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  #vpErrorList li {
+    background: #2a0a0a;
+    color: #ff6b6b;
+    border-left: 3px solid #e63946;
+    padding: 6px 10px;
+    margin-bottom: 5px;
+    border-radius: 0 4px 4px 0;
+    font-size: 12px;
+    font-family: monospace;
+  }
+  #vpCorrectionNote {
+    margin-top: 10px;
+    padding: 8px 12px;
+    background: #1a1000;
+    border: 1px solid #f0a500;
+    border-radius: 4px;
+    color: #f0a500;
+    font-size: 11px;
+    display: none;
+  }
+  .confidence-gate-overlay {
+    position: relative;
+  }
+  .confidence-gate-overlay::after {
+    content: '🔒 Complete Validation above to unlock';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.75);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #e63946;
+    font-size: 13px;
+    font-weight: 700;
+    border-radius: 6px;
+    z-index: 10;
+    pointer-events: all;
+    cursor: not-allowed;
+  }
+
+  /* END BP26 VALIDATION LAYER v1.0 CSS */
 </style>
 </head>
 <body>
@@ -1080,6 +1241,58 @@
   </div>
 
   <!-- SUBMIT ROW -->
+  <!-- ============================================================
+       BP26 VALIDATION LAYER v1.0 — BP26-SPEC-20260401-01
+       ============================================================ -->
+  <div id="validationPanel">
+    <h3>⚙ Validation Layer v1.0 — Framework Enforcement Gate</h3>
+    <div class="vp-grid">
+      <div class="vp-field">
+        <label for="val_asymmetry">Asymmetry</label>
+        <select id="val_asymmetry">
+          <option value="">— Select —</option>
+          <option value="YES">YES</option>
+          <option value="NO">NO</option>
+        </select>
+      </div>
+      <div class="vp-field">
+        <label for="val_mechanism">Mechanism</label>
+        <select id="val_mechanism">
+          <option value="">— Select —</option>
+          <option value="CLEAR">CLEAR</option>
+          <option value="UNCLEAR">UNCLEAR</option>
+        </select>
+      </div>
+      <div class="vp-field">
+        <label for="val_expectedVsActual">Expected vs Actual Move</label>
+        <select id="val_expectedVsActual">
+          <option value="">— Select —</option>
+          <option value="REMAINS">REMAINS</option>
+          <option value="NEUTRAL">NEUTRAL</option>
+          <option value="GONE">GONE</option>
+        </select>
+      </div>
+      <div class="vp-field">
+        <label for="val_confirmation">Confirmation</label>
+        <select id="val_confirmation">
+          <option value="">— Select —</option>
+          <option value="NONE">NONE</option>
+          <option value="PARTIAL">PARTIAL</option>
+          <option value="STRONG">STRONG</option>
+        </select>
+      </div>
+    </div>
+    <div class="vp-cvs-row">
+      <input type="checkbox" id="val_cvs" />
+      <label for="val_cvs">I confirm all factual claims are verified and no assumptions are made</label>
+    </div>
+    <button id="vpValidateBtn" type="button">✓ VALIDATE ANALYSIS</button>
+    <div id="vpStatusBar"></div>
+    <ul id="vpErrorList"></ul>
+    <div id="vpCorrectionNote">Fix all errors above and re-validate before proceeding.</div>
+  </div>
+  <!-- END BP26 VALIDATION LAYER v1.0 HTML -->
+
   <div class="btn-row" id="submitRow">
     <button class="btn btn-primary btn-full" id="submitBtn" onclick="submitEntry()">📋 SAVE DECISION TO LEDGER</button>
     <button class="btn btn-secondary" id="clearBtn" onclick="clearForm()" style="width:140px">CLEAR FORM</button>
@@ -3368,5 +3581,274 @@ document.addEventListener('DOMContentLoaded', function() {
   document.getElementById('totalsFilterFlags')?.addEventListener('change', v14_checkWarnings);
 });
 </script>
+<!-- ============================================================
+     BP26 VALIDATION LAYER v1.0 — BP26-SPEC-20260401-01
+     Corrections applied: 4/1/26
+     ============================================================ -->
+<script>
+(function () {
+  'use strict';
+
+  // ─── STATE ──────────────────────────────────────────────────
+  // Schema keys used consistently: validationStatus / validationErrors
+  window.bp26_validationState = {
+    validationStatus: null,
+    validationErrors: []
+  };
+
+  // ─── VALIDATION ENGINE ───────────────────────────────────────
+  // Deterministic. No side effects. Returns result object only.
+  window.bp26_runValidation = function () {
+    var errors = [];
+
+    var asymmetry        = document.getElementById('val_asymmetry').value;
+    var mechanism        = document.getElementById('val_mechanism').value;
+    var expectedVsActual = document.getElementById('val_expectedVsActual').value;
+    var confirmation     = document.getElementById('val_confirmation').value;
+    var cvsChecked       = document.getElementById('val_cvs').checked;
+    var decisionRadio    = document.querySelector('input[name="decisionType"]:checked');
+    var decisionType     = decisionRadio ? decisionRadio.value : '';
+
+    var textContent = [
+      document.getElementById('signalWhat').value        || '',
+      document.getElementById('signalWhy').value         || '',
+      document.getElementById('signalInvalidates').value || '',
+      document.getElementById('preGameNotes').value      || '',
+      document.getElementById('postGameNotes').value     || '',
+      document.getElementById('failureDetail').value     || ''
+    ].join(' ').toLowerCase();
+
+    // RULE V1 — Structure Enforcement
+    if (!asymmetry)        errors.push('V1: Asymmetry is required');
+    if (!mechanism)        errors.push('V1: Mechanism is required');
+    if (!expectedVsActual) errors.push('V1: Expected vs Actual Move is required');
+    if (!confirmation)     errors.push('V1: Confirmation is required');
+    if (!decisionType)     errors.push('V1: Classification (decisionType) is required');
+
+    // RULE V2 — Mechanism required for SIM/BET
+    if ((decisionType === 'SIM' || decisionType === 'BET') && mechanism !== 'CLEAR') {
+      errors.push('V2: SIM/BET requires Mechanism = CLEAR');
+    }
+
+    // RULE V3 — Expected vs Actual Move on every entry
+    if (!expectedVsActual) {
+      errors.push('V3: Expected vs Actual Move must be set on every entry');
+    }
+
+    // RULE V4 — CVS Compliance
+    if (!cvsChecked) {
+      errors.push('V4: CVS — confirm all factual claims are verified before proceeding');
+    }
+
+    // RULE V5 — Narrative Drift Prohibition
+    // Expanded 4/1/26: added elite, terrible, awful, strong team, weak team
+    var prohibited = [
+      'good team', 'bad team', 'dominant', 'tank team',
+      'should win', 'better team', 'record mismatch', 'market is correct',
+      'elite', 'terrible', 'awful', 'strong team', 'weak team'
+    ];
+    prohibited.forEach(function (term) {
+      if (textContent.indexOf(term) !== -1) {
+        errors.push('V5: Prohibited language detected — "' + term + '"');
+      }
+    });
+
+    // RULE V6 — Gate Misuse Prevention
+    // Corrected 4/1/26: PASS requires both signalWhat AND signalWhy
+    if (decisionType === 'PASS') {
+      var signalWhat = (document.getElementById('signalWhat').value || '').trim();
+      var signalWhy  = (document.getElementById('signalWhy').value  || '').trim();
+      if (!signalWhat || !signalWhy) {
+        errors.push('V6: PASS requires full evaluation — signalWhat and signalWhy must be completed');
+      }
+    }
+
+    // Deduplicate (V1 and V3 can both flag expectedVsActual)
+    var unique = errors.filter(function (e, i, a) { return a.indexOf(e) === i; });
+
+    return {
+      validationStatus: unique.length === 0 ? 'PASS' : 'FAIL',
+      validationErrors: unique
+    };
+  };
+
+  // ─── UI UPDATE ───────────────────────────────────────────────
+  window.bp26_updateValidationUI = function (result) {
+    var panel      = document.getElementById('validationPanel');
+    var statusBar  = document.getElementById('vpStatusBar');
+    var errorList  = document.getElementById('vpErrorList');
+    var correction = document.getElementById('vpCorrectionNote');
+    var submitBtn  = document.getElementById('submitBtn');
+    var confPanel  = document.getElementById('scoreOverridePanel');
+    var passPanel  = document.getElementById('passScoringSection');
+
+    window.bp26_validationState = result;
+
+    var isPASS = result.validationStatus === 'PASS';
+
+    panel.classList.toggle('vp-pass', isPASS);
+    panel.querySelector('h3').textContent = isPASS
+      ? '✅ Validation Layer v1.0 — PASSED'
+      : '⚙ Validation Layer v1.0 — Framework Enforcement Gate';
+
+    statusBar.style.display = 'block';
+    statusBar.className = isPASS ? 'vp-status-pass' : 'vp-status-fail';
+    statusBar.textContent = isPASS
+      ? '✅ VALIDATION PASSED — Confidence scoring unlocked'
+      : '❌ VALIDATION FAILED — ' + result.validationErrors.length + ' error(s)';
+
+    errorList.innerHTML = '';
+    result.validationErrors.forEach(function (err) {
+      var li = document.createElement('li');
+      li.textContent = err;
+      errorList.appendChild(li);
+    });
+
+    correction.style.display = isPASS ? 'none' : 'block';
+
+    submitBtn.disabled      = !isPASS;
+    submitBtn.style.opacity = isPASS ? '1' : '0.4';
+    submitBtn.style.cursor  = isPASS ? 'pointer' : 'not-allowed';
+    submitBtn.title         = isPASS ? '' : 'Validation must PASS before saving';
+
+    [confPanel, passPanel].forEach(function (el) {
+      if (!el) return;
+      if (isPASS) {
+        el.classList.remove('confidence-gate-overlay');
+        el.querySelectorAll('input, select, textarea, button').forEach(function (f) {
+          f.disabled = false;
+        });
+      } else {
+        el.classList.add('confidence-gate-overlay');
+        el.querySelectorAll('input, select, textarea, button').forEach(function (f) {
+          f.disabled = true;
+        });
+      }
+    });
+  };
+
+  // ─── RESET ───────────────────────────────────────────────────
+  // Schema keys consistent: validationStatus / validationErrors
+  window.bp26_resetValidation = function () {
+    window.bp26_validationState = {
+      validationStatus: null,
+      validationErrors: []
+    };
+
+    var panel      = document.getElementById('validationPanel');
+    var statusBar  = document.getElementById('vpStatusBar');
+    var errorList  = document.getElementById('vpErrorList');
+    var correction = document.getElementById('vpCorrectionNote');
+    var submitBtn  = document.getElementById('submitBtn');
+    var confPanel  = document.getElementById('scoreOverridePanel');
+    var passPanel  = document.getElementById('passScoringSection');
+
+    panel.classList.remove('vp-pass');
+    panel.querySelector('h3').textContent = '⚙ Validation Layer v1.0 — Framework Enforcement Gate';
+    statusBar.style.display  = 'none';
+    statusBar.className      = '';
+    statusBar.textContent    = '';
+    errorList.innerHTML      = '';
+    correction.style.display = 'none';
+
+    submitBtn.disabled      = true;
+    submitBtn.style.opacity = '0.4';
+    submitBtn.style.cursor  = 'not-allowed';
+    submitBtn.title         = 'Validation must PASS before saving';
+
+    [confPanel, passPanel].forEach(function (el) {
+      if (!el) return;
+      el.classList.add('confidence-gate-overlay');
+      el.querySelectorAll('input, select, textarea, button').forEach(function (f) {
+        f.disabled = true;
+      });
+    });
+  };
+
+  // ─── FIELD CHANGE HANDLER ────────────────────────────────────
+  window.bp26_onFieldChange = function () {
+    if (window.bp26_validationState.validationStatus === 'PASS') {
+      window.bp26_resetValidation();
+    }
+  };
+
+  // ─── SUBMIT GATE + FIELD INJECTION ───────────────────────────
+  // Wraps existing submitEntry(). Does NOT replace it.
+  // Field injection is explicit here — no Storage.prototype override.
+  var _origSubmitEntry = window.submitEntry;
+  window.submitEntry = function () {
+
+    // Final gate — re-run at save time
+    var result = window.bp26_runValidation();
+    if (result.validationStatus !== 'PASS') {
+      window.bp26_updateValidationUI(result);
+      document.getElementById('validationPanel').scrollIntoView({
+        behavior: 'smooth',
+        block: 'center'
+      });
+      return; // BLOCK
+    }
+
+    // Snapshot ledger count before save
+    var ledgerBefore = JSON.parse(localStorage.getItem('bp26:ledger') || '[]');
+    var countBefore  = ledgerBefore.length;
+
+    // Run original save
+    _origSubmitEntry.apply(this, arguments);
+
+    // Find new entry and inject validation + framework fields
+    var ledgerAfter = JSON.parse(localStorage.getItem('bp26:ledger') || '[]');
+    if (ledgerAfter.length > countBefore) {
+      var newEntry = ledgerAfter[ledgerAfter.length - 1];
+      if (newEntry && newEntry.validationStatus === undefined) {
+        var state = window.bp26_validationState;
+        // Default is 'FAIL' — never 'UNKNOWN'
+        newEntry.validationStatus     = state.validationStatus  || 'FAIL';
+        newEntry.validationErrors     = state.validationErrors  || [];
+        newEntry.asymmetry            = (document.getElementById('val_asymmetry')        || {}).value || '';
+        newEntry.mechanism            = (document.getElementById('val_mechanism')        || {}).value || '';
+        newEntry.expectedVsActualMove = (document.getElementById('val_expectedVsActual') || {}).value || '';
+        newEntry.confirmation         = (document.getElementById('val_confirmation')     || {}).value || '';
+        localStorage.setItem('bp26:ledger', JSON.stringify(ledgerAfter));
+      }
+    }
+  };
+
+  // ─── DOM READY — INIT ────────────────────────────────────────
+  document.addEventListener('DOMContentLoaded', function () {
+
+    // Initial state — blocked until validation passes
+    window.bp26_resetValidation();
+
+    // Validate button
+    document.getElementById('vpValidateBtn').addEventListener('click', function () {
+      var result = window.bp26_runValidation();
+      window.bp26_updateValidationUI(result);
+    });
+
+    // Field change listeners — reset if any watched field changes after PASS
+    var watchedIds = [
+      'signalWhat', 'signalWhy', 'signalInvalidates',
+      'preGameNotes', 'postGameNotes', 'failureDetail',
+      'val_asymmetry', 'val_mechanism', 'val_expectedVsActual',
+      'val_confirmation', 'val_cvs'
+    ];
+    watchedIds.forEach(function (id) {
+      var el = document.getElementById(id);
+      if (!el) return;
+      var evt = el.type === 'checkbox' ? 'change' : 'input';
+      el.addEventListener(evt, window.bp26_onFieldChange);
+    });
+
+    // decisionType radios
+    document.querySelectorAll('input[name="decisionType"]').forEach(function (radio) {
+      radio.addEventListener('change', window.bp26_onFieldChange);
+    });
+
+  });
+
+})();
+</script>
+<!-- END BP26 VALIDATION LAYER v1.0 JS -->
 </body>
 </html>
