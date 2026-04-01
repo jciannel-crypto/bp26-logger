@@ -3666,10 +3666,12 @@ document.addEventListener('DOMContentLoaded', function() {
     // Deduplicate (V1 and V3 can both flag expectedVsActual)
     var unique = errors.filter(function (e, i, a) { return a.indexOf(e) === i; });
 
-    return {
+    var result = {
       validationStatus: unique.length === 0 ? 'PASS' : 'FAIL',
       validationErrors: unique
     };
+    bp26_logValidationAttempt(result); // BP26-SPEC-20260401-02 — log every attempt
+    return result;
   };
 
   // ─── UI UPDATE ───────────────────────────────────────────────
@@ -3846,6 +3848,76 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
   });
+
+  // ─── VALIDATION ANALYTICS — BP26-SPEC-20260401-02 ───────────
+  // Passive observational layer. Logs every validation attempt.
+  // Does NOT affect validation, confidence, or save flow.
+
+  window.bp26_logValidationAttempt = function (result) {
+    try {
+      var log = JSON.parse(localStorage.getItem('bp26:validationLog') || '[]');
+      if (!Array.isArray(log)) log = [];
+
+      var away = (document.getElementById('awayTeam') || {}).value || '';
+      var home = (document.getElementById('homeTeam') || {}).value || '';
+      var game = (away && home) ? away + ' @ ' + home : '';
+
+      log.push({
+        timestamp:        new Date().toISOString(),
+        validationStatus: result.validationStatus,
+        errors:           result.validationErrors || [],
+        decisionType:     (document.querySelector('input[name="decisionType"]:checked') || {}).value || '',
+        game:             game
+      });
+
+      // FIFO cap — keep newest 500
+      if (log.length > 500) {
+        log = log.slice(log.length - 500);
+      }
+
+      localStorage.setItem('bp26:validationLog', JSON.stringify(log));
+    } catch (e) {
+      // Silent failure — never affects validation
+    }
+  };
+
+  window.bp26_printValidationStats = function () {
+    try {
+      var log = JSON.parse(localStorage.getItem('bp26:validationLog') || '[]');
+      if (!log.length) {
+        console.log('[BP26] No validation attempts logged yet.');
+        return;
+      }
+
+      var total    = log.length;
+      var passes   = log.filter(function (e) { return e.validationStatus === 'PASS'; }).length;
+      var passRate = ((passes / total) * 100).toFixed(1);
+
+      var ruleCounts = { V1:0, V2:0, V3:0, V4:0, V5:0, V6:0 };
+      log.forEach(function (entry) {
+        (entry.errors || []).forEach(function (err) {
+          var match = err.match(/^(V[1-6])/);
+          if (match) ruleCounts[match[1]] = (ruleCounts[match[1]] || 0) + 1;
+        });
+      });
+
+      var topRule = ['V1','V2','V3','V4','V5','V6'].sort(function (a, b) {
+        return ruleCounts[b] - ruleCounts[a];
+      })[0];
+
+      console.log('=== BP26 VALIDATION ANALYTICS ===');
+      console.log('Total attempts : ' + total);
+      console.log('Pass rate      : ' + passRate + '% (' + passes + '/' + total + ')');
+      console.log('Most common    : ' + (ruleCounts[topRule] > 0 ? topRule + ' (' + ruleCounts[topRule] + ' hits)' : 'none'));
+      console.log('--- Rule breakdown ---');
+      ['V1','V2','V3','V4','V5','V6'].forEach(function (rule) {
+        console.log(rule + '           : ' + (ruleCounts[rule] || 0));
+      });
+      console.log('=================================');
+    } catch (e) {
+      console.log('[BP26] Could not read validation log: ' + e.message);
+    }
+  };
 
 })();
 </script>
