@@ -286,7 +286,7 @@
 
 
   /* ============================================================
-     BP26 VALIDATION LAYER v1.0 — BP26-SPEC-20260401-01
+     BP26 VALIDATION LAYER v1.1 — BP26-SPEC-20260401-01 + BP26-SPEC-20260406-01
      Corrections applied: 4/1/26
      ============================================================ */
 
@@ -444,7 +444,7 @@
     cursor: not-allowed;
   }
 
-  /* END BP26 VALIDATION LAYER v1.0 CSS */
+  /* END BP26 VALIDATION LAYER v1.1 CSS */
 </style>
 </head>
 <body>
@@ -1242,10 +1242,10 @@
 
   <!-- SUBMIT ROW -->
   <!-- ============================================================
-       BP26 VALIDATION LAYER v1.0 — BP26-SPEC-20260401-01
+       BP26 VALIDATION LAYER v1.1 — BP26-SPEC-20260401-01 + BP26-SPEC-20260406-01
        ============================================================ -->
   <div id="validationPanel">
-    <h3>⚙ Validation Layer v1.0 — Framework Enforcement Gate</h3>
+    <h3>⚙ Validation Layer v1.1 — Framework Enforcement Gate</h3>
     <div class="vp-grid">
       <div class="vp-field">
         <label for="val_asymmetry">Asymmetry</label>
@@ -1291,7 +1291,7 @@
     <ul id="vpErrorList"></ul>
     <div id="vpCorrectionNote">Fix all errors above and re-validate before proceeding.</div>
   </div>
-  <!-- END BP26 VALIDATION LAYER v1.0 HTML -->
+  <!-- END BP26 VALIDATION LAYER v1.1 HTML -->
 
   <div class="btn-row" id="submitRow">
     <button class="btn btn-primary btn-full" id="submitBtn" onclick="submitEntry()">📋 SAVE DECISION TO LEDGER</button>
@@ -3582,7 +3582,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 <!-- ============================================================
-     BP26 VALIDATION LAYER v1.0 — BP26-SPEC-20260401-01
+     BP26 VALIDATION LAYER v1.1 — BP26-SPEC-20260401-01 + BP26-SPEC-20260406-01
      Corrections applied: 4/1/26
      ============================================================ -->
 <script>
@@ -3663,6 +3663,17 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     }
 
+    // RULE V7 — Expected vs Actual Move Gate (BP26-SPEC-20260406-01)
+    // Effective: 2026-04-06 | Approved: Jason Ciannello | Atlas: ✔ | Claude: ✔
+    // Priority: sits above confidence scoring — NEUTRAL edge = no residual mispricing = PASS mandatory
+    if (decisionType === 'SIM' || decisionType === 'BET') {
+      var evamEl = document.getElementById('val_expectedVsActual');
+      var evamVal = (evamEl ? evamEl.value || '' : '').trim();
+      if (evamVal === 'NEUTRAL') {
+        errors.push('V7: expectedVsActualMove = NEUTRAL — edge absorbed, classification must be PASS regardless of confidence score (BP26-SPEC-20260406-01)');
+      }
+    }
+
     // Deduplicate (V1 and V3 can both flag expectedVsActual)
     var unique = errors.filter(function (e, i, a) { return a.indexOf(e) === i; });
 
@@ -3690,8 +3701,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     panel.classList.toggle('vp-pass', isPASS);
     panel.querySelector('h3').textContent = isPASS
-      ? '✅ Validation Layer v1.0 — PASSED'
-      : '⚙ Validation Layer v1.0 — Framework Enforcement Gate';
+      ? '✅ Validation Layer v1.1 — PASSED'
+      : '⚙ Validation Layer v1.1 — Framework Enforcement Gate';
 
     statusBar.style.display = 'block';
     statusBar.className = isPASS ? 'vp-status-pass' : 'vp-status-fail';
@@ -3746,7 +3757,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var passPanel  = document.getElementById('passScoringSection');
 
     panel.classList.remove('vp-pass');
-    panel.querySelector('h3').textContent = '⚙ Validation Layer v1.0 — Framework Enforcement Gate';
+    panel.querySelector('h3').textContent = '⚙ Validation Layer v1.1 — Framework Enforcement Gate';
     statusBar.style.display  = 'none';
     statusBar.className      = '';
     statusBar.textContent    = '';
@@ -3893,7 +3904,7 @@ document.addEventListener('DOMContentLoaded', function() {
       var passes   = log.filter(function (e) { return e.validationStatus === 'PASS'; }).length;
       var passRate = ((passes / total) * 100).toFixed(1);
 
-      var ruleCounts = { V1:0, V2:0, V3:0, V4:0, V5:0, V6:0 };
+      var ruleCounts = { V1:0, V2:0, V3:0, V4:0, V5:0, V6:0, V7:0 };
       log.forEach(function (entry) {
         (entry.errors || []).forEach(function (err) {
           var match = err.match(/^(V[1-6])/);
@@ -3901,7 +3912,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
       });
 
-      var topRule = ['V1','V2','V3','V4','V5','V6'].sort(function (a, b) {
+      var topRule = ['V1','V2','V3','V4','V5','V6','V7'].sort(function (a, b) {
         return ruleCounts[b] - ruleCounts[a];
       })[0];
 
@@ -3910,7 +3921,7 @@ document.addEventListener('DOMContentLoaded', function() {
       console.log('Pass rate      : ' + passRate + '% (' + passes + '/' + total + ')');
       console.log('Most common    : ' + (ruleCounts[topRule] > 0 ? topRule + ' (' + ruleCounts[topRule] + ' hits)' : 'none'));
       console.log('--- Rule breakdown ---');
-      ['V1','V2','V3','V4','V5','V6'].forEach(function (rule) {
+      ['V1','V2','V3','V4','V5','V6','V7'].forEach(function (rule) {
         console.log(rule + '           : ' + (ruleCounts[rule] || 0));
       });
       console.log('=================================');
@@ -3921,6 +3932,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 })();
 </script>
-<!-- END BP26 VALIDATION LAYER v1.0 JS -->
+<!-- END BP26 VALIDATION LAYER v1.1 JS -->
 </body>
 </html>
