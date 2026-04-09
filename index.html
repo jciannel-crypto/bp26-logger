@@ -20,26 +20,20 @@
   }
   *{margin:0;padding:0;box-sizing:border-box;}
   body{font-family:'IBM Plex Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:14px;}
-
-  /* HEADER */
   .header{background:var(--surface);border-bottom:1px solid var(--border);padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:56px;position:sticky;top:0;z-index:100;}
   .logo{font-family:'IBM Plex Mono',monospace;font-size:15px;font-weight:600;color:var(--amber);letter-spacing:.05em;}
   .logo span{color:var(--text2);font-weight:400;font-size:12px;margin-left:10px;}
   .backup-status{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--text3);background:var(--card);border:1px solid var(--border);padding:4px 10px;border-radius:var(--radius);}
   .backup-status.ok{color:var(--green);border-color:var(--green-dim);}
-
-  /* TABS */
   .tabs{display:flex;gap:2px;background:var(--surface);border-bottom:1px solid var(--border);padding:0 24px;}
   .tab{font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:500;letter-spacing:.08em;padding:12px 20px;cursor:pointer;color:var(--text3);border-bottom:2px solid transparent;transition:all .15s;text-transform:uppercase;background:none;border-top:none;border-left:none;border-right:none;}
   .tab:hover{color:var(--text2);}
   .tab.active{color:var(--amber);border-bottom-color:var(--amber);}
-
-  /* LAYOUT */
   .page{display:none;padding:24px;max-width:1100px;margin:0 auto;}
   .page.active{display:block;}
   .form-grid{display:grid;gap:16px;}
   .section{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:opacity .2s;}
-  .section.cal-section{overflow:visible;}  /* §01 needs visible for calendar popup */
+  .section.cal-section{overflow:visible;}
   .section-header{padding:10px 16px;background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
   .section-title{font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--amber);}
   .badge{font-family:'IBM Plex Mono',monospace;font-size:10px;padding:2px 7px;border-radius:3px;font-weight:500;}
@@ -82,8 +76,6 @@
   select option{background:var(--card);}
   textarea{resize:vertical;min-height:64px;line-height:1.5;font-size:12px;}
   .help{font-size:11px;color:var(--text3);margin-top:3px;font-family:'IBM Plex Mono',monospace;}
-
-  /* POST-GAME BANNER */
   .pg-banner{display:none;background:linear-gradient(135deg,#1a0a00,#2a1500);border:1px solid var(--amber);border-radius:var(--radius);padding:16px 20px;margin-bottom:4px;}
   .pg-banner.active{display:block;}
   .pg-banner-top{display:flex;align-items:center;justify-content:space-between;gap:12px;}
@@ -93,17 +85,12 @@
   .pg-banner-actions{display:flex;gap:8px;align-items:center;flex-shrink:0;}
   .pg-lock-notice{margin-top:10px;padding:8px 12px;background:rgba(0,0,0,.3);border-radius:4px;font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--text3);letter-spacing:.04em;}
   .pg-lock-notice span{color:var(--red);}
-
-  /* LOCKED SECTION STATE */
   .section.locked{opacity:.28;pointer-events:none;}
   .section.locked .section-header{background:#0a0b0f;}
-  /* Closing lines re-enabled even when section locked */
   .closing-line-wrap{position:relative;}
   .closing-line-wrap.pg-active{pointer-events:all;opacity:1;}
   .closing-line-wrap.pg-active input{border-color:var(--amber)!important;background:var(--surface)!important;color:var(--text)!important;box-shadow:0 0 0 2px rgba(245,158,11,.15);}
   .pg-field-label{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--amber);letter-spacing:.1em;text-transform:uppercase;margin-bottom:2px;}
-
-  /* CALENDAR POPUP */
   .cal-wrap{position:relative;}
   .cal-input-btn{background:var(--surface);border:1px solid var(--border2);border-radius:var(--radius);color:var(--text);font-family:'IBM Plex Mono',monospace;font-size:13px;padding:8px 10px;width:100%;cursor:pointer;text-align:left;display:flex;align-items:center;justify-content:space-between;transition:border-color .15s;}
   .cal-input-btn:hover,.cal-input-btn.open{border-color:var(--amber);box-shadow:0 0 0 2px rgba(245,158,11,.12);}
@@ -121,12 +108,8 @@
   .cal-day.today{color:var(--amber);font-weight:600;}
   .cal-day.selected{background:var(--amber);color:#000;font-weight:600;}
   .cal-day.other-month{color:var(--text3);opacity:.4;}
-
-  /* TIP-OFF */
   .tipoff-wrap{display:flex;flex-direction:column;gap:5px;}
   .tipoff-manual{margin-top:4px;display:none;}
-
-  /* DECISION TYPE */
   .decision-group{display:flex;gap:8px;flex-wrap:wrap;}
   .decision-option{display:flex;align-items:center;cursor:pointer;}
   .decision-option input[type="radio"]{display:none;}
@@ -134,32 +117,20 @@
   .decision-option input[type="radio"]:checked+.decision-label.bet-label{background:var(--green-dim);color:var(--green);border-color:var(--green);}
   .decision-option input[type="radio"]:checked+.decision-label.sim-label{background:var(--blue-dim);color:var(--blue);border-color:var(--blue);}
   .decision-option input[type="radio"]:checked+.decision-label.pass-label{background:var(--yellow-dim);color:var(--yellow);border-color:var(--yellow);}
-
-  /* MATCHUP PREVIEW */
   .matchup-preview{background:var(--bg);border:1px solid var(--border2);border-radius:var(--radius);padding:12px;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:18px;font-weight:600;color:var(--amber);letter-spacing:.05em;margin-top:10px;}
-
-  /* COMPUTED DISPLAY */
   .computed-display{background:var(--bg);border:1px solid var(--border2);border-radius:var(--radius);padding:10px 12px;font-family:'IBM Plex Mono',monospace;font-size:13px;text-align:center;color:var(--text3);margin-top:8px;}
   .computed-display.pos{color:var(--green);border-color:var(--green-dim);}
   .computed-display.neg{color:var(--red);border-color:var(--red-dim);}
   .computed-display.neu{color:var(--amber);border-color:var(--amber-dim);}
   .computed-display.sim{color:var(--blue);border-color:var(--blue-dim);}
   .computed-display.push{color:var(--text2);}
-
-  /* CONFIDENCE */
   input[type="range"]{-webkit-appearance:none;background:var(--border2);height:4px;border-radius:2px;padding:0;border:none;cursor:pointer;}
   input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;border-radius:50%;background:var(--amber);cursor:pointer;}
   input[type="range"]:focus{box-shadow:none;border:none;}
   .conf-val{font-family:'IBM Plex Mono',monospace;font-size:28px;font-weight:600;color:var(--amber);text-align:center;margin-top:6px;}
-
-  /* WARNING */
   .warning{background:var(--yellow-dim);border:1px solid var(--yellow);border-radius:var(--radius);padding:10px 12px;font-size:12px;color:var(--yellow);margin-top:10px;font-family:'IBM Plex Mono',monospace;}
-
-  /* NOTES DISTINCTION */
   .section.pre-notes .section-header{border-left:3px solid var(--text3);}
   .section.post-notes .section-header{border-left:3px solid var(--blue);}
-
-  /* BUTTONS */
   .btn{font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;letter-spacing:.08em;padding:10px 20px;border:none;border-radius:var(--radius);cursor:pointer;transition:all .15s;text-transform:uppercase;}
   .btn:hover{opacity:.85;transform:translateY(-1px);}
   .btn:active{transform:translateY(0);}
@@ -170,14 +141,10 @@
   .btn-red{background:var(--red-dim);color:var(--red);border:1px solid var(--red);}
   .btn-full{width:100%;}
   .btn-row{display:flex;gap:10px;margin-top:16px;}
-
-  /* TOAST */
   .toast{position:fixed;bottom:24px;right:24px;padding:12px 20px;border-radius:var(--radius);font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:500;z-index:999;display:none;animation:slideIn .2s ease;}
   .toast.success{background:var(--green);color:#000;}
   .toast.error{background:var(--red);color:#fff;}
   @keyframes slideIn{from{transform:translateY(20px);opacity:0}to{transform:translateY(0);opacity:1}}
-
-  /* LEDGER */
   .ledger-toolbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;gap:12px;flex-wrap:wrap;}
   .ledger-stats{display:flex;gap:20px;flex-wrap:wrap;}
   .stat{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--text2);}
@@ -195,8 +162,6 @@
   .row-win{border-left:3px solid var(--green-dim);}
   .row-loss{border-left:3px solid var(--red-dim);}
   .row-pass{border-left:3px solid var(--yellow-dim);}
-
-  /* PILLS */
   .pill{display:inline-block;padding:2px 8px;border-radius:3px;font-size:10px;font-weight:600;letter-spacing:.06em;font-family:'IBM Plex Mono',monospace;}
   .pill-bet{background:var(--green-dim);color:var(--green);}
   .pill-sim{background:var(--blue-dim);color:var(--blue);}
@@ -211,11 +176,8 @@
   .pill-pw{background:var(--green-dim);color:var(--green);}
   .pill-cp{background:var(--blue-dim);color:var(--blue);}
   .pill-pl{background:var(--red-dim);color:var(--red);}
-
   .empty-state{padding:60px;text-align:center;color:var(--text3);font-family:'IBM Plex Mono',monospace;font-size:13px;}
   .empty-state .big{font-size:32px;margin-bottom:12px;}
-
-  /* LMS PANEL */
   .lms-panel{margin-top:14px;border:1px solid var(--border2);border-radius:var(--radius);overflow:hidden;}
   .lms-panel-header{display:flex;align-items:center;justify-content:space-between;padding:8px 12px;background:var(--bg);cursor:pointer;user-select:none;border-bottom:1px solid var(--border2);}
   .lms-panel-header:hover{background:var(--surface);}
@@ -236,13 +198,10 @@
   .lms-signal.abort{color:var(--red);}
   .lms-signal.caution{color:var(--amber);}
   .lms-note{margin-top:6px;padding:7px 10px;background:var(--yellow-dim);border:1px solid var(--yellow);border-radius:4px;font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--yellow);}
-
-  /* EXPORT */
   .export-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
   .export-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;}
   .export-card h3{font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--amber);margin-bottom:8px;}
   .export-card p{font-size:12px;color:var(--text2);line-height:1.6;margin-bottom:14px;}
-  /* PLAYER ROWS (§08 v3.5) */
   .player-rows-wrap{display:flex;flex-direction:column;gap:8px;margin-bottom:12px;}
   .player-row{display:grid;grid-template-columns:1fr 100px 160px 80px 140px 32px;gap:8px;align-items:end;background:var(--bg);border:1px solid var(--border2);border-radius:var(--radius);padding:10px;}
   .player-row-num{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--text3);text-align:center;padding-bottom:2px;}
@@ -250,12 +209,8 @@
   .btn-add-player:hover{background:rgba(245,158,11,.12);}
   .btn-remove-player{background:none;border:1px solid var(--red-dim);border-radius:4px;color:var(--red);cursor:pointer;font-size:14px;padding:4px 7px;line-height:1;height:32px;transition:all .15s;}
   .btn-remove-player:hover{background:var(--red-dim);}
-
-  /* PROTOCOL PASS (v3.5) */
   .decision-option input[type="radio"]:checked+.decision-label.protocol-pass-label{background:#1a0a2e;color:#c084fc;border-color:#7c3aed;}
   .protocol-pass-section{display:none;margin-top:10px;padding:12px;background:#1a0a2e;border:1px solid #7c3aed;border-radius:var(--radius);}
-
-  /* SCORE OVERRIDE GATE (v3.5) */
   .score-override-panel{margin-top:14px;border:1px solid var(--amber);border-radius:var(--radius);overflow:hidden;}
   .score-override-header{display:flex;align-items:center;gap:10px;padding:10px 14px;background:rgba(245,158,11,.08);cursor:pointer;}
   .score-override-title{font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;letter-spacing:.08em;color:var(--amber);text-transform:uppercase;}
@@ -264,17 +219,12 @@
   .override-toggle-wrap{display:flex;align-items:center;gap:8px;margin-bottom:12px;}
   .override-toggle-label{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--amber);cursor:pointer;}
   .override-active-note{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--red);margin-top:6px;padding:6px 10px;background:rgba(239,68,68,.08);border-radius:4px;display:none;}
-
-  /* DEPLETION ASYMMETRY (v3.5) */
   .depletion-wrap{display:flex;gap:8px;align-items:center;margin-top:10px;}
   .depletion-badge{font-family:'IBM Plex Mono',monospace;font-size:10px;padding:2px 8px;border-radius:3px;cursor:default;}
   .depletion-yes{background:rgba(239,68,68,.12);color:var(--red);border:1px solid var(--red-dim);}
   .depletion-no{background:var(--border);color:var(--text3);}
   .depletion-na{background:var(--border);color:var(--text3);}
-
-  /* SIGNAL ORIGIN (v3.5) */
   .signal-origin-wrap{margin-bottom:12px;}
-
   .pill-protocol-pass{background:#1a0a2e;color:#c084fc;border:1px solid #7c3aed;}
   .sd-entry{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:12px;}
   .sd-id{font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:700;color:var(--amber);letter-spacing:.1em;}
@@ -284,12 +234,10 @@
   .sd-validated{background:rgba(16,185,129,.12);color:var(--green);}
   .sd-rejected{background:rgba(239,68,68,.12);color:var(--red);}
 
-
   /* ============================================================
-     BP26 VALIDATION LAYER v1.1 — BP26-SPEC-20260401-01 + BP26-SPEC-20260406-01
-     Corrections applied: 4/1/26
+     BP26 VALIDATION LAYER v1.2 — BP26-SPEC-20260401-01 + BP26-SPEC-20260406-01 + BP26-SPEC-20260409-01
+     Corrections applied: 4/1/26 | Updated: 4/9/26 (BP26-SPEC-20260409-01)
      ============================================================ */
-
   #validationPanel {
     background: #1a1a2e;
     border: 2px solid #e63946;
@@ -443,8 +391,7 @@
     pointer-events: all;
     cursor: not-allowed;
   }
-
-  /* END BP26 VALIDATION LAYER v1.1 CSS */
+  /* END BP26 VALIDATION LAYER v1.2 CSS */
 </style>
 </head>
 <body>
@@ -648,7 +595,6 @@
           <div class="field"><label>Current (T-60) — Team</label><input type="text" id="currentSpreadTeam" placeholder="HOU" oninput="computeMoves()" style="text-transform:uppercase"></div>
           <div class="field"><label>Current (T-60) — Line</label><input type="number" id="currentSpreadNum" placeholder="-4.5" step="0.5" oninput="computeMoves()"></div>
         </div>
-        <!-- CLOSING SPREAD — post-game unlocked field -->
         <div class="field closing-line-wrap" id="closingSpreadWrap" style="margin-top:8px">
           <label>Closing Spread <span class="opt">(post-game)</span></label>
           <input type="text" id="closingSpread" placeholder="e.g. HOU -5 (fill after game)" oninput="computeCLV()">
@@ -664,7 +610,6 @@
           <div class="field"><label>Current Total (T-60)</label><input type="number" id="currentTotalNum" placeholder="217.5" step="0.5" oninput="computeMoves()"></div>
           <div class="field"></div><div class="field"></div>
         </div>
-        <!-- CLOSING TOTAL — post-game unlocked field -->
         <div class="field closing-line-wrap" id="closingTotalWrap" style="margin-top:8px">
           <label>Closing Total <span class="opt">(post-game)</span></label>
           <input type="text" id="closingTotal" placeholder="e.g. 216 (fill after game)" oninput="computeCLV()">
@@ -787,6 +732,7 @@
       </div>
     </div>
   </div>
+
 <!-- 07b MARKET TIMING & SIGNAL QUALITY (v1.4) -->
   <div class="section pre-game-section" id="sec07b">
     <div class="section-header">
@@ -876,12 +822,57 @@
 
     </div>
   </div>
-  
+
+  <!-- 07c MARKET STATE & SIGNAL ENVIRONMENT — BP26-SPEC-20260409-01 -->
+  <div class="section pre-game-section" id="sec07c">
+    <div class="section-header">
+      <span class="section-title">07c &#8212; Market State &amp; Signal Environment</span>
+      <span class="badge badge-opt">BP26-SPEC-20260409-01</span>
+    </div>
+    <div class="section-body">
+      <p style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--text3);margin:0 0 12px;letter-spacing:.04em">
+        Analytical context only &#8212; does not override PASS / SIM / BET classification.
+      </p>
+      <div class="row3">
+        <div class="field">
+          <label>Big Steam State <span class="opt">(required if move &#8805;3.0 pts)</span></label>
+          <select id="bigSteamState">
+            <option value="NONE">NONE &#8212; move &lt;3.0 pts</option>
+            <option value="PRICED_CORRECTLY">PRICED_CORRECTLY &#8212; market absorbed efficiently</option>
+            <option value="OVERREACTION_CANDIDATE">OVERREACTION_CANDIDATE &#8212; move exceeds structural info</option>
+            <option value="INCOMPLETE_REPRICE">INCOMPLETE_REPRICE &#8212; market may not fully reflect catalyst</option>
+            <option value="UNUSABLE_NEWS_REPRICE">UNUSABLE_NEWS_REPRICE &#8212; move observed after edge window</option>
+          </select>
+          <p class="help" id="bigSteamStateHelp">Required when spread or total moves &#8805;3.0 pts from open. Classify before proceeding.</p>
+        </div>
+        <div class="field">
+          <label>Conditional Signal Status <span class="opt">(pre-confirmation setups)</span></label>
+          <select id="conditionalSignalStatus">
+            <option value="NONE">NONE</option>
+            <option value="CONDITIONAL_SIGNAL">CONDITIONAL_SIGNAL &#8212; asymmetry present, awaiting confirmation</option>
+          </select>
+          <p class="help">Use when setup exists but key player/news status unresolved. Does not activate SIM alone.</p>
+        </div>
+        <div class="field">
+          <label>Signal Environment Tags <span class="opt">(ctrl+click for multiple)</span></label>
+          <select id="signalEnvironmentTags" multiple size="6" style="min-height:128px">
+            <option value="DUAL_REVERSE_SIGNAL">DUAL_REVERSE_SIGNAL &#8212; spread + total both show reverse behavior</option>
+            <option value="EXTREME_TOTAL_REPRICE">EXTREME_TOTAL_REPRICE &#8212; major total market reset &#8805;6 pts</option>
+            <option value="BILATERAL_DEPLETION_DISTORTION">BILATERAL_DEPLETION_DISTORTION &#8212; both teams materially depleted</option>
+            <option value="TRUE_NEUTRAL_PRICING">TRUE_NEUTRAL_PRICING &#8212; market movement proportionate to info</option>
+            <option value="LOW_QUALITY_RLM">LOW_QUALITY_RLM &#8212; RLM present but noisy/distorted</option>
+            <option value="PRE_CONFIRMATION_SETUP">PRE_CONFIRMATION_SETUP &#8212; live unresolved setup pending confirmation</option>
+          </select>
+          <p class="help">Descriptive only. Helps classify PASS quality: routine vs structural learning case. No classification impact.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- 08 INJURY MODULE -->
   <div class="section pre-game-section" id="sec08">
     <div class="section-header"><span class="section-title">08 — Injury Module</span><span class="badge badge-opt">OPTIONAL</span></div>
     <div class="section-body">
-      <!-- Per-player rows (v3.5) -->
       <div id="playerRowsWrap" class="player-rows-wrap"></div>
       <button type="button" class="btn-add-player" onclick="addPlayerRow()">+ ADD PLAYER</button>
       <div class="row2" style="margin-top:14px">
@@ -935,7 +926,7 @@
     </div>
   </div>
 
-  <!-- 10 CONFIDENCE — MECHANICAL SCORER (Rubric Key v1.0) -->
+  <!-- 10 CONFIDENCE -->
   <div class="section pre-game-section" id="sec10">
     <div class="section-header">
       <span class="section-title">10 — Confidence Score</span>
@@ -943,7 +934,6 @@
     </div>
     <div class="section-body">
       <p style="font-size:10px;color:var(--text3);margin:0 0 14px;font-family:'IBM Plex Mono',monospace;letter-spacing:.04em">All required. Score auto-computes from 7-component rubric. No manual entry permitted.</p>
-
       <div class="row2" style="margin-bottom:10px">
         <div class="field">
           <label>Move Detected At <span class="req">*</span> <span class="opt">(when move was observed — not entry time)</span></label>
@@ -955,7 +945,6 @@
         </div>
       </div>
       <input type="hidden" id="timingGate" value="">
-
       <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:14px">
         <div class="field">
           <label>DK Open Odds <span class="req">*</span> <span class="opt">(at open)</span></label>
@@ -972,7 +961,6 @@
           <input type="text" id="juiceCentsDisplay" readonly placeholder="—">
         </div>
       </div>
-      <!-- SHARP CONSENSUS LINE — v3.5 C1 fix for Stale Book -->
       <div class="row2" style="margin-bottom:14px" id="sharpConsensusRow">
         <div class="field">
           <label>Sharp Consensus Line <span class="opt">(Stale Book: enter sharp book number)</span></label>
@@ -985,14 +973,11 @@
         </div>
       </div>
       <input type="hidden" id="juiceCents" value="">
-
       <div style="margin-top:4px">
         <label style="font-size:10px;color:var(--text3);letter-spacing:.08em;font-family:'IBM Plex Mono',monospace">CONFIDENCE SCORE — READ-ONLY · FORMULA OUTPUT</label>
         <input type="text" id="confidence" readonly value="—" style="margin-top:6px;width:100%;box-sizing:border-box">
         <div class="computed-display" id="confDisplay" style="margin-top:4px;font-size:11px">Complete all required inputs to generate score</div>
       </div>
-
-      <!-- SCORE OVERRIDE GATE (v3.5) -->
       <div class="score-override-panel" id="scoreOverridePanel">
         <div class="score-override-header" onclick="toggleScoreOverride()">
           <span class="score-override-title">⚙ SCORE OVERRIDE GATE</span>
@@ -1035,7 +1020,6 @@
           </div>
         </div>
       </div>
-
       <div class="rubric-breakdown" id="rubricBreakdown">
         <h4>📊 7-Component Scoring Breakdown</h4>
         <div class="rubric-row"><span class="rubric-label">C1  Market Movement (0–30)</span><span class="rubric-val" id="rb_c1">—</span></div>
@@ -1052,7 +1036,7 @@
     </div>
   </div>
 
-  <!-- PASS SCORING CONTEXT — visible only when PASS selected, feeds §10 rubric -->
+  <!-- PASS SCORING CONTEXT -->
   <div class="section pre-game-section" id="passScoringSection" style="display:none">
     <div class="section-header">
       <span class="section-title">03 — Signal Context (PASS)</span>
@@ -1077,7 +1061,6 @@
       </div>
     </div>
   </div>
-
 
   <div class="section pre-game-section" id="passSection" style="display:none">
     <div class="section-header"><span class="section-title">11 — Pass Reason</span><span class="badge badge-req">REQUIRED FOR PASS</span></div>
@@ -1144,7 +1127,6 @@
         <label>Pass-of-Note?</label>
         <select id="passOfNote"><option value="NO">No</option><option value="YES">YES — Important restraint decision</option></select>
       </div>
-      <!-- CLV AUTO-COMPUTED -->
       <div class="row2" style="margin-top:14px;padding-top:14px;border-top:1px solid var(--border)">
         <div class="field">
           <label>CLV — Spread <span class="opt" id="clvSpreadHint">(auto from §04 closing spread)</span></label>
@@ -1186,7 +1168,7 @@
     </div>
   </div>
 
-  <!-- 15 SIGNAL LOOP — POST-GAME ONLY -->
+  <!-- 15 SIGNAL LOOP -->
   <div class="section" id="sec15">
     <div class="section-header">
       <span class="section-title">15 — Signal Loop</span>
@@ -1236,16 +1218,16 @@
       <span>⚠ LEGACY ENTRY MODE — bypasses rubric gates for pre-rubric historical bets. Entry tagged LEGACY in dataset.</span>
     </label>
     <div id="legacyWarning" style="display:none;margin-top:8px;font-size:10px;color:var(--text3);font-family:'IBM Plex Mono',monospace">
-      LEGACY MODE ACTIVE — Confidence + band gates disabled. Date, teams, decision type, result, P&amp;L, and process tag still required. Entry will be marked LEGACY in ledger.
+      LEGACY MODE ACTIVE — Confidence + band gates disabled. Date, teams, decision type, result, P&L, and process tag still required. Entry will be marked LEGACY in ledger.
     </div>
   </div>
 
-  <!-- SUBMIT ROW -->
+  <!-- VALIDATION PANEL -->
   <!-- ============================================================
-       BP26 VALIDATION LAYER v1.1 — BP26-SPEC-20260401-01 + BP26-SPEC-20260406-01
+       BP26 VALIDATION LAYER v1.2 — BP26-SPEC-20260401-01 + BP26-SPEC-20260406-01 + BP26-SPEC-20260409-01
        ============================================================ -->
   <div id="validationPanel">
-    <h3>⚙ Validation Layer v1.1 — Framework Enforcement Gate</h3>
+    <h3>⚙ Validation Layer v1.2 — Framework Enforcement Gate</h3>
     <div class="vp-grid">
       <div class="vp-field">
         <label for="val_asymmetry">Asymmetry</label>
@@ -1291,7 +1273,7 @@
     <ul id="vpErrorList"></ul>
     <div id="vpCorrectionNote">Fix all errors above and re-validate before proceeding.</div>
   </div>
-  <!-- END BP26 VALIDATION LAYER v1.1 HTML -->
+  <!-- END BP26 VALIDATION LAYER v1.2 HTML -->
 
   <div class="btn-row" id="submitRow">
     <button class="btn btn-primary btn-full" id="submitBtn" onclick="submitEntry()">📋 SAVE DECISION TO LEDGER</button>
@@ -1311,7 +1293,6 @@
       <button class="btn btn-secondary" onclick="refreshLedger()">↻ REFRESH</button>
     </div>
   </div>
-  <!-- SCHEMA MIGRATION BANNER — shown when legacy entries detected -->
   <div id="migrationBanner" style="display:none;margin-bottom:12px;padding:12px 16px;border:2px solid var(--amber);border-radius:6px;background:rgba(245,158,11,0.08)">
     <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--amber);font-weight:700;margin-bottom:6px">⚠ SCHEMA MIGRATION AVAILABLE — Schema v1/v2 entries detected</div>
     <div id="migrationSummary" style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--text2);margin-bottom:10px"></div>
@@ -1319,7 +1300,6 @@
     <button onclick="runMigration()" style="background:var(--amber);color:#000;border:none;border-radius:4px;padding:8px 18px;font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:700;cursor:pointer;letter-spacing:.05em">⬆ MIGRATE TO SCHEMA v3</button>
     <button onclick="document.getElementById('migrationBanner').style.display='none'" style="background:none;border:1px solid var(--border);color:var(--text3);border-radius:4px;padding:8px 12px;font-family:'IBM Plex Mono',monospace;font-size:10px;cursor:pointer;margin-left:8px">Dismiss</button>
   </div>
-
   <div style="margin-bottom:10px;padding:6px 12px;border-left:3px solid var(--amber);background:rgba(245,158,11,0.04);display:flex;align-items:center;gap:10px">
     <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--amber);letter-spacing:.06em">&#128205; v3.5 RELEASE</span>
     <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--text3)">Logger v3.5 deployed <strong style="color:var(--text2)">March 7, 2026</strong> — Score Override Gate · Protocol PASS · Per-Player §08 · Signal Origin · C1/C5 scoring fixes · SD-001 tracking · Signal Discovery tab</span>
@@ -1425,7 +1405,6 @@
   <div style="padding:20px;max-width:1100px;margin:0 auto">
     <h2 style="color:var(--amber);font-family:'IBM Plex Mono',monospace;font-size:14px;letter-spacing:.08em;margin-bottom:4px">🧪 SIGNAL DISCOVERY LOG — Hypothesis Tracking</h2>
     <p style="color:var(--text3);font-size:12px;margin-bottom:24px">Observations that may indicate edge signals. HYPOTHESIS ONLY — no protocol changes until validated at required sample size.</p>
-
     <div class="sd-entry">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
         <div>
@@ -1467,7 +1446,6 @@
       </div>
       <div id="sd001Entries" style="margin-top:10px"></div>
     </div>
-
     <div style="margin-top:20px;padding:12px 16px;border:1px dashed var(--border2);border-radius:var(--radius)">
       <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--text3);margin-bottom:6px">ADD NEW SIGNAL DISCOVERY ENTRY</div>
       <div class="row3" style="margin-bottom:10px">
@@ -1486,7 +1464,6 @@
       <div class="field" style="margin-bottom:10px"><label>Validation Criteria</label><input type="text" id="sdNewCriteria" placeholder="e.g. 20+ instances, blowout rate > 60%"></div>
       <button class="btn btn-primary" onclick="addSDEntry()" style="font-size:11px;padding:8px 16px">+ ADD SIGNAL DISCOVERY</button>
     </div>
-
     <div id="sdCustomEntries" style="margin-top:16px"></div>
   </div>
 </div>
@@ -1640,7 +1617,6 @@ function onManualScoreInput(){
     deltaEl.value='—';
     deltaEl.style.color='';
   }
-  // Rerun drift check with manual score
   const betType=(document.getElementById('betType').value||'').toUpperCase();
   const currentSpread=Math.abs(parseFloat(document.getElementById('currentSpreadNum').value)||0);
   const currentTotal=parseFloat(document.getElementById('currentTotalNum').value)||0;
@@ -1692,7 +1668,7 @@ async function refreshSD(){
             <th style="padding:7px 10px;text-align:left;font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--text3);border-bottom:1px solid var(--border)">BLOWOUT?</th>
           </tr></thead>
           <tbody>${sd001.map(e=>{
-            const margin=e.finalScore?(()=>{const m=e.finalScore.match(/(\d+)[^\\d]+(\d+)/);return m?Math.abs(parseInt(m[1])-parseInt(m[2])):null;})():null;
+            const margin=e.finalScore?(()=>{const m=e.finalScore.match(/(\d+)[^\d]+(\d+)/);return m?Math.abs(parseInt(m[1])-parseInt(m[2])):null;})():null;
             const isBlowout=margin!==null&&margin>15;
             return`<tr style="border-bottom:1px solid var(--border)">
               <td style="padding:7px 10px;font-family:'IBM Plex Mono',monospace">${e.date||'—'}</td>
@@ -1709,8 +1685,6 @@ async function refreshSD(){
   } else if(entriesEl){
     entriesEl.innerHTML=`<div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--text3);padding:8px 0">No DepletionAsymmetry=YES entries logged yet. Tag entries in §08 to populate.</div>`;
   }
-
-  // Custom SD entries
   const custom=await loadSDLog();
   const customEl=document.getElementById('sdCustomEntries');
   if(customEl&&custom.length>0){
@@ -1790,13 +1764,11 @@ function computeCLV(selOverride){
   const betType=(document.getElementById('betType').value||'').toLowerCase();
   const closingSpreadRaw=document.getElementById('closingSpread').value.trim();
   const closingTotalRaw=document.getElementById('closingTotal').value.trim();
-
   const spreadDisplay=document.getElementById('clvSpreadDisplay');
   const spreadInput=document.getElementById('clvSpread');
   const decisionSpreadNum=extractSpreadNumber(sel);
   const closingSpreadNum=extractSpreadNumber(closingSpreadRaw);
   const spreadRelevant=!betType||betType==='spread'||betType==='run line'||betType==='puck line';
-
   if(spreadRelevant&&decisionSpreadNum!==null&&closingSpreadNum!==null){
     const clv=parseFloat((decisionSpreadNum-closingSpreadNum).toFixed(1));
     const sign=clv>0?'+':'';
@@ -1810,13 +1782,11 @@ function computeCLV(selOverride){
     spreadDisplay.textContent='Enter closing spread in §04 to compute';
     spreadDisplay.className='computed-display';
   }
-
   const totalDisplay=document.getElementById('clvTotalDisplay');
   const totalInput=document.getElementById('clvTotal');
   const totalSel=sel.match(/^(over|under|o|u)\s*([\d.]+)/i);
   const closingTotalNum=parseFloat(closingTotalRaw);
   const totalRelevant=!betType||betType==='total'||betType==='over/under';
-
   if(totalRelevant&&totalSel&&!isNaN(closingTotalNum)&&closingTotalNum>0){
     const dir=totalSel[1].toUpperCase();
     const decisionTotal=parseFloat(totalSel[2]);
@@ -1912,33 +1882,22 @@ async function openPostGame(betId){
   const entries=await loadEntries();
   const e=entries.find(x=>x.betId===betId);
   if(!e)return;
-
   postGameMode=true;
   postGameId=betId;
-
-  // Load all fields
   populateFormFromEntry(e);
-
-  // Switch to log tab
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
   document.getElementById('tab-log').classList.add('active');
   document.getElementById('tabLog').classList.add('active');
-
-  // Show banner
   const banner=document.getElementById('pgBanner');
   banner.classList.add('active');
   document.getElementById('pgBannerMatchup').textContent=e.matchup||'— @ —';
   document.getElementById('pgBannerSub').textContent=
     `${e.decisionType||'?'} · ${e.betType||''} ${e.selection||''} ${e.odds||''} · ${e.date||''}`;
-
-  // Lock all pre-game sections
   document.querySelectorAll('.pre-game-section').forEach(sec=>{
     sec.classList.add('locked');
     sec.querySelectorAll('input,select,textarea,button').forEach(el=>el.disabled=true);
   });
-
-  // Re-enable closing lines + show hints
   ['closingSpread','closingTotal'].forEach(id=>{
     const el=document.getElementById(id);
     if(el)el.disabled=false;
@@ -1951,7 +1910,6 @@ async function openPostGame(betId){
       if(hint)hint.style.display='block';
     }
   });
-  // Section 04 needs pointer-events restored just for those two fields
   const sec04=document.getElementById('sec04');
   if(sec04){
     sec04.style.pointerEvents='none';
@@ -1960,12 +1918,8 @@ async function openPostGame(betId){
       if(wrap)wrap.style.pointerEvents='all';
     });
   }
-
-  // Change submit button
   document.getElementById('submitBtn').textContent='💾 SAVE POST-GAME RESULT';
   document.getElementById('clearBtn').style.display='none';
-
-  // Unlock post-game-only fields
   const fsEl=document.getElementById('finalScore');
   fsEl.disabled=false;fsEl.style.opacity='';fsEl.style.cursor='';
   document.getElementById('finalScoreHint').textContent='📍 Enter final score below';
@@ -1981,16 +1935,11 @@ async function openPostGame(betId){
   document.getElementById('failureModeHint').textContent='Primary failure classification';
   document.getElementById('learningNoteHint').textContent='One sentence';
   computeCLV(e.selection||'');
-
-  // Scroll to sec12
   window.scrollTo({top:0,behavior:'instant'});
   setTimeout(()=>{
     document.getElementById('sec12').scrollIntoView({behavior:'smooth',block:'start'});
   },100);
-
   toast(`📋 Post-game mode: ${e.matchup}`,'success');
-
-  // Snapshot original post-game field values for unsaved-changes guard
   _pgOriginalState={
     finalScore: e.finalScore||'',
     processTag: e.processTag||'',
@@ -2001,7 +1950,6 @@ async function openPostGame(betId){
 }
 
 function exitPostGameMode(){
-  // Unsaved changes guard
   const hasFinalScore=document.getElementById('finalScore').value.trim()&&document.getElementById('finalScore').value.trim()!==_pgOriginalState.finalScore;
   const hasProcessTag=document.getElementById('processTag').value&&document.getElementById('processTag').value!==_pgOriginalState.processTag;
   const hasPostNotes=document.getElementById('postGameNotes').value.trim()&&document.getElementById('postGameNotes').value.trim()!==_pgOriginalState.postGameNotes;
@@ -2012,18 +1960,12 @@ function exitPostGameMode(){
   }
   postGameMode=false;
   postGameId=null;
-
-  // Hide banner
   document.getElementById('pgBanner').classList.remove('active');
-
-  // Unlock all pre-game sections
   document.querySelectorAll('.pre-game-section').forEach(sec=>{
     sec.classList.remove('locked');
     sec.style.pointerEvents='';
     sec.querySelectorAll('input,select,textarea,button').forEach(el=>el.disabled=false);
   });
-
-  // Remove closing line highlights
   ['closingSpreadWrap','closingTotalWrap'].forEach(id=>{
     const wrap=document.getElementById(id);
     if(wrap){
@@ -2035,12 +1977,8 @@ function exitPostGameMode(){
   });
   const sec04=document.getElementById('sec04');
   if(sec04)sec04.style.pointerEvents='';
-
-  // Reset button
   document.getElementById('submitBtn').textContent='📋 SAVE DECISION TO LEDGER';
   document.getElementById('clearBtn').style.display='';
-
-  // Re-lock post-game-only fields
   const fsEl=document.getElementById('finalScore');
   fsEl.disabled=true;fsEl.style.opacity='.35';fsEl.style.cursor='not-allowed';
   document.getElementById('finalScoreHint').textContent='🔒 Unlocks in post-game mode';
@@ -2056,7 +1994,6 @@ function exitPostGameMode(){
   ['invalidationHappenedHint','invalidationTypeHint','failureModeHint','learningNoteHint'].forEach(id=>{
     const el=document.getElementById(id);if(el)el.textContent='🔒 Unlocks post-game';
   });
-
   clearForm();
 }
 
@@ -2083,7 +2020,7 @@ function initCal(){
 }
 
 function toggleCal(){
-  if(postGameMode)return; // locked in post-game
+  if(postGameMode)return;
   const popup=document.getElementById('calPopup'),btn=document.getElementById('calBtn');
   const open=popup.classList.contains('open');
   if(open){popup.classList.remove('open');btn.classList.remove('open');}
@@ -2156,7 +2093,6 @@ function updateMatchup(){
   const a=(document.getElementById('awayTeam').value||'').split(' ')[0];
   const h=(document.getElementById('homeTeam').value||'').split(' ')[0];
   document.getElementById('matchupPreview').textContent=(a&&h)?`${a} @ ${h}`:'— @ —';
-  // Auto-propagate away abbrev into Open/Current Spread Team — only if blank (never override manual edits)
   if(a){
     const ost=document.getElementById('openSpreadTeam');
     const cst=document.getElementById('currentSpreadTeam');
@@ -2169,23 +2105,20 @@ function updateMatchup(){
 function getTeamAbbr(val){return(val||'').split(' ')[0]||'';}
 
 // ══════════════════════════════════════════════════════════
-// BET TYPE CHANGE — hide/show selection fields on NONE/PASS
+// BET TYPE CHANGE
 // ══════════════════════════════════════════════════════════
 function onBetTypeChange(){
   const bt=document.getElementById('betType').value;
   const isNonePass=bt==='NONE_PASS';
-  // RULE: oddsField NEVER hides — feeds §10 Juice Pressure for ALL decision types
   ['selectionField','stakeField'].forEach(id=>{
     const el=document.getElementById(id);
     if(el) el.style.display=isNonePass?'none':'';
   });
-  // Update odds label to signal its scoring role when NONE_PASS active
   const oddsLabel=document.querySelector('#oddsField label');
   if(oddsLabel) oddsLabel.textContent=isNonePass?'Current Odds (§10 scoring required)':'Odds';
   if(isNonePass){
     document.getElementById('selection').value='';
     document.getElementById('stake').value='0';
-    // DO NOT clear odds — required for confidence scoring
   }
   computeConfidence();
 }
@@ -2211,7 +2144,6 @@ function onDecisionChange(){
   const sb=document.getElementById('signalBadge'),cb=document.getElementById('confBadge');
   [sb,cb].forEach(el=>{if(el){el.textContent=(val==='PASS'||val==='PROTOCOL_PASS')?'OPTIONAL':'REQUIRED FOR BET/SIM';el.className=(val==='PASS'||val==='PROTOCOL_PASS')?'badge badge-opt':'badge badge-req';}});
   if(val==='PASS'||val==='PROTOCOL_PASS'){
-    // PROTOCOL_PASS auto-locks stake to $0
     if(val==='PROTOCOL_PASS'){
       document.getElementById('stake').value='0';
       document.getElementById('liveMoney').value='NO';
@@ -2233,12 +2165,6 @@ function onDecisionChange(){
 // ══════════════════════════════════════════════════════════
 // MARKET MOVEMENT
 // ══════════════════════════════════════════════════════════
-// ── Unit-tested direction rule (Fix 1 / v3.4) ───────────────
-// opponent(team): if openSpreadTeam==awayTeam → opponent=homeTeam, else awayTeam
-// delta = currentSpreadNum - openSpreadNum (same-team perspective)
-// delta < 0 → toward openSpreadTeam
-// delta > 0 → toward opponent
-// delta = 0 → FLAT
 function getOpponent(spreadTeam){
   const away=(document.getElementById('awayTeam').value||'').split(' ')[0].toUpperCase();
   const home=(document.getElementById('homeTeam').value||'').split(' ')[0].toUpperCase();
@@ -2253,7 +2179,6 @@ function computeMoves(){
   const cn=parseFloat(document.getElementById('currentSpreadNum').value);
   const sd=document.getElementById('spreadMoveDisplay');
   if(!isNaN(on)&&!isNaN(cn)&&ot&&ct){
-    // Team mismatch warning — direction ambiguous if teams differ
     if(ot!==ct){
       sd.className='computed-display neg';
       sd.innerHTML='⚠ TEAM MISMATCH — Open team ('+ot+') ≠ Current team ('+ct+'). Log spread from same-team perspective.';
@@ -2261,7 +2186,6 @@ function computeMoves(){
     } else {
       const delta=parseFloat((cn-on).toFixed(1)),abs=Math.abs(delta);
       const opp=getOpponent(ot);
-      // Correct direction: delta<0 = toward ot, delta>0 = toward opponent
       const dir=delta<0?`toward ${ot}`:delta>0?`toward ${opp}`:'FLAT';
       document.getElementById('spreadMovePts').value=delta;
       document.getElementById('spreadMoveAbs').value=abs;
@@ -2382,7 +2306,7 @@ function computePnL(){
 }
 
 // ══════════════════════════════════════════════════════════
-// TIMING GATE (move time vs tip time → bucket)
+// TIMING GATE
 // ══════════════════════════════════════════════════════════
 function computeTimingGate(){
   const tipRaw=document.getElementById('tipOffFinal').value||document.getElementById('tipOffTime').value||'';
@@ -2405,11 +2329,9 @@ function computeTimingGate(){
 }
 
 // ══════════════════════════════════════════════════════════
-// RUBRIC KEY v1.0 — MECHANICAL CONFIDENCE SCORER
-// All components deterministic from discrete inputs. No judgment.
+// CONFIDENCE SCORER (Rubric v1.0)
 // ══════════════════════════════════════════════════════════
 function computeConfidence(){
-  // FIX 3: Legacy mode — skip mechanical scorer entirely. Never write PARTIAL for legacy entries.
   if(legacyMode||document.getElementById('legacyToggle')?.checked){
     const confEl=document.getElementById('confidence');
     if(confEl){confEl.value='LEGACY';confEl.className='band-legacy';}
@@ -2420,7 +2342,6 @@ function computeConfidence(){
   }
   const dt=document.querySelector('input[name="decisionType"]:checked')?.value||'';
   const isPass=dt==='PASS';
-
   const betType=(document.getElementById('betType').value||'').toUpperCase();
   const currentOddsRaw=(document.getElementById('odds').value||'').replace(/[^0-9+\-]/g,'');
   const moveSpeed=(document.getElementById('moveSpeed').value||'').toUpperCase();
@@ -2437,12 +2358,8 @@ function computeConfidence(){
   const totalAbs=parseFloat(document.getElementById('totalMoveAbs').value)||0;
   const currentSpread=Math.abs(parseFloat(document.getElementById('currentSpreadNum').value)||0);
   const currentTotal=parseFloat(document.getElementById('currentTotalNum').value)||0;
-
-  // Pick move size by bet type
   const isNonePass=betType==='NONE_PASS';
   const isTotal=betType==='TOTAL'||betType==='OVER/UNDER';
-
-  // v3.5: C1 FIX — for Stale Book, use sharp consensus gap instead of DK move
   const isStaleBook=moveType==='Stale Book';
   const sharpConsensusRaw=parseFloat(document.getElementById('sharpConsensusLine')?.value)||null;
   const staleBookGapEl=document.getElementById('staleBookGapDisplay');
@@ -2457,24 +2374,15 @@ function computeConfidence(){
   } else {
     if(staleBookGapEl)staleBookGapEl.value='—';
   }
-
-  // Effective move size: Stale Book uses gap if available, else falls back to DK movement
   let moveSizePts;
   if(isStaleBook&&staleBookGap!==null){
     moveSizePts=staleBookGap;
   } else {
     moveSizePts=isNonePass?Math.max(spreadAbs,totalAbs):isTotal?totalAbs:spreadAbs;
   }
-
-  // Mirror §03 current odds into §10 display field
   const mirrorEl=document.getElementById('currentOddsMirror');
   if(mirrorEl) mirrorEl.value=currentOddsRaw||'';
-
-  // FIX 4: NONE_PASS + PASS — juice deterministically 0 if no odds entered
-  // This is an explicit rule, not a hidden-field side effect
   const nonePassNoOdds=(isPass&&betType==='NONE_PASS'&&currentOddsRaw==='');
-
-  // Compute JuiceCents
   const openOdds=parseFloat(openOddsRaw);
   const currentOdds=parseFloat(currentOddsRaw);
   let juiceCents=null;
@@ -2488,8 +2396,6 @@ function computeConfidence(){
     juiceH.value='';
     juiceD.value='Enter open odds (§10) + current odds (§03)';
   }
-
-  // Derived flags
   const bigSpreadFlag=currentSpread>=12;
   const highTotalFlag=currentTotal>=240;
   const lateFlipFlag=lateMarket.includes('Flip')||lateMarket.includes('Buyback')||lateMarket.includes('Reversal');
@@ -2498,24 +2404,19 @@ function computeConfidence(){
   const isLate=timingGate==='T-60→T-20'||timingGate==='T-20→TIP';
   const isLateClass=injuryClass==='LATE_SURPRISE'||injuryClass==='LATE';
   const isActive=injuryClass==='ACTIVE_UNCERTAIN'||injuryClass==='ACTIVE';
-
-  // Missing input detection
   const missing=[];
   if(!moveSpeed) missing.push('Move Speed (§07)');
   if(!timingGate) missing.push('Move Detected At (§10)');
   if(!moveType) missing.push('Move Type (§07)');
   if(!multiBook) missing.push('Multi-Book (§07)');
   if(isNaN(openOdds)||openOddsRaw==='') missing.push('DK Open Odds (§10)');
-  // FIX 4: NONE_PASS+PASS with no odds → C2 zeros deterministically, not a missing input error
   if(!nonePassNoOdds&&(isNaN(currentOdds)||currentOddsRaw==='')) missing.push('Current Odds (§03)');
   if(!injuryClass) missing.push('Injury Class (§08)');
   if(isNaN(publicBet)||isNaN(publicMoney)) missing.push('Public Bet% + Money% (§08)');
   if(moveSizePts===0&&(spreadAbs===0&&totalAbs===0)) missing.push('Open + Current line (§04)');
-
   const missingEl=document.getElementById('rubricMissing');
   const confEl=document.getElementById('confidence');
   const confDisp=document.getElementById('confDisplay');
-
   if(missing.length>0){
     missingEl.style.display='block';
     missingEl.textContent='⚠ PARTIAL_INVALID — Missing: '+missing.join(' · ');
@@ -2527,15 +2428,14 @@ function computeConfidence(){
     return;
   }
   missingEl.style.display='none';
-
-  // ── C1: Market Movement Strength (0–30) ───────────────
+  // C1
   let c1b=0;
   if(moveSizePts<0.5) c1b=0;
   else if(moveSizePts<1.0) c1b=6;
   else if(moveSizePts<1.5) c1b=12;
   else if(moveSizePts<2.0) c1b=18;
   else if(moveSizePts<2.5) c1b=24;
-  else c1b=28; // base 28 at ≥2.5 so speed/timing bonuses are not wasted
+  else c1b=28;
   let c1adj=0;
   if(moveSpeed==='FAST') c1adj+=2;
   else if(moveSpeed==='SLOW') c1adj-=2;
@@ -2543,9 +2443,7 @@ function computeConfidence(){
   else if(timingGate==='T-60→T-20') c1adj+=2;
   else if(timingGate==='T-90→T-60') c1adj+=1;
   const c1=Math.max(0,Math.min(30,c1b+c1adj));
-
-  // ── C2: Juice / Price Pressure (0–15) ─────────────────
-  // FIX 4: NONE_PASS+PASS+no-odds → C2=0 by rule, not by error
+  // C2
   let c2=0;
   if(!nonePassNoOdds){
     if(juiceCents<5) c2=0;
@@ -2554,46 +2452,38 @@ function computeConfidence(){
     else if(juiceCents<20) c2=12;
     else c2=15;
   }
-
-  // ── C3: Injury Informativeness (0–20) ─────────────────
+  // C3
   let c3=0;
   if(injuryClass==='NONE') c3=0;
   else if(injuryClass==='BAKED_IN'||injuryClass==='BAKED') c3=3;
   else if(isActive) c3=10;
   else if(isLateClass) c3=18;
-  if(isLateClass&&isLate) c3=Math.min(20,c3+2); // bonus: late surprise + late timing
+  if(isLateClass&&isLate) c3=Math.min(20,c3+2);
   const c3f=Math.min(20,c3);
-
-  // ── C4: Market Agreement (0–15) ───────────────────────
+  // C4
   let c4=0;
   const multiYes=multiBook==='YES'||multiBook==='Yes';
   if(!multiYes) c4=2;
   else c4=sharpKnown?13:8;
   if(isSteam) c4=Math.min(15,c4+2);
-
-  // ── C5: Public Divergence (0–10) — v3.5 FIX ─────────────
-  // Now considers: ticket/money divergence + RLM signal type + contrarian position
+  // C5
   const publicSignalTypeVal=(document.getElementById('publicSignalType').value||'').toUpperCase();
   const publicSideVal=(document.getElementById('publicSide').value||'').toUpperCase();
   const D=Math.abs(publicMoney-publicBet);
   let c5=0;
-  // Base: ticket/money divergence
   if(D<5) c5=0;
   else if(D<10) c5=3;
   else if(D<15) c5=5;
   else if(D<20) c5=7;
   else c5=9;
-  // v3.5 bonus: RLM setup = line moving against public = strong contrarian signal
   if(publicSignalTypeVal==='RLM_SETUP') c5=Math.min(10,c5+4);
-  // v3.5 bonus: we're on the side the public ISN'T on (HEAVY_FAV but we're on dog, or EXTREME_OVER but we're on under)
   const isContrarian=(publicSignalTypeVal==='HEAVY_FAV'&&(publicSideVal==='FAV'))||
                      (publicSignalTypeVal==='HEAVY_DOG'&&(publicSideVal==='DOG'))||
                      (publicSignalTypeVal==='EXTREME_TOTAL_OVER'&&(publicSideVal==='OVER'))||
                      (publicSignalTypeVal==='EXTREME_TOTAL_UNDER'&&(publicSideVal==='UNDER'));
   if(isContrarian) c5=Math.min(10,c5+2);
   c5=Math.min(10,c5);
-
-  // ── C6: Volatility Penalty (0 to −10) ─────────────────
+  // C6
   let c6=0;
   if(isTotal) c6-=4;
   if(highTotalFlag) c6-=3;
@@ -2601,18 +2491,13 @@ function computeConfidence(){
   if(isActive) c6-=3;
   if(lateFlipFlag) c6-=2;
   const c6f=Math.max(-10,c6);
-
-  // ── C7: Totals Modifier ────────────────────────────────
+  // C7
   let c7=0;
   if(isTotal){
     const waiver=c1>=24&&multiYes&&(isLateClass||isSteam)&&isLate;
     c7=waiver?0:-5;
   }
-
-  // ── Final score ────────────────────────────────────────
   const score=Math.max(0,Math.min(100,c1+c2+c3f+c4+c5+c6f+c7));
-
-  // ── Update breakdown panel ─────────────────────────────
   const rb=(id,val,cap)=>{
     const el=document.getElementById(id);
     if(!el) return;
@@ -2636,8 +2521,6 @@ function computeConfidence(){
   if(rb7){rb7.textContent=c7===0?'0 (waiver)':c7+' (default)';rb7.className='rubric-val '+(c7===0?'neu':'neg');}
   const rbt=document.getElementById('rb_total');
   if(rbt){rbt.textContent=score;rbt.className='rubric-val '+(score>=60?'pos':score>=40?'neu':'neg');}
-
-  // ── Confidence display (readonly) ─────────────────────
   confEl.value=score;
   let band,cls;
   if(score>=80){band='STRONG — Actionable';cls='band-strong';}
@@ -2647,11 +2530,8 @@ function computeConfidence(){
   confEl.className=cls;
   confDisp.textContent='Score: '+score+' · '+band;
   confDisp.className='computed-display '+(score>=60?'pos':score>=40?'neu':'neg');
-
-  // Sync logger score into override display
   const loggerEl=document.getElementById('loggerConfidenceDisplay');
   if(loggerEl)loggerEl.value=String(score);
-  // Update delta if override active
   const overrideActive=document.getElementById('scoreOverrideActive')?.checked;
   if(overrideActive){
     const manual=parseInt(document.getElementById('manualConfidence').value)||null;
@@ -2661,8 +2541,6 @@ function computeConfidence(){
       if(dEl){dEl.value=(delta>=0?'+':'')+delta;dEl.style.color=Math.abs(delta)>10?'var(--red)':Math.abs(delta)>5?'var(--amber)':'var(--green)';}
     }
   }
-
-  // Drift check: use effective score (manual override if active, else logger)
   const effectiveScore=overrideActive?(parseInt(document.getElementById('manualConfidence').value)||score):score;
   _checkDrift(effectiveScore,betType,bigSpreadFlag,highTotalFlag,[]);
 }
@@ -2673,17 +2551,16 @@ function setBreakdownDashes(){
   });
 }
 
-// ── Drift Detection (Enforcement §5) ──────────────────────
 function _checkDrift(score,betType,bigSpreadFlag,highTotalFlag,missing){
   const flags=[];
   if(missing&&missing.length>0) flags.push('MISSING_REQUIRED_INPUTS ('+missing.length+'): '+missing.join(', '));
-  if(bigSpreadFlag) flags.push('BIG_SPREAD_FLAG — spread ≥12: review Big Spread Rule before betting');
-  if(highTotalFlag) flags.push('HIGH_TOTAL_FLAG — total ≥240: high volatility zone');
+  if(bigSpreadFlag) flags.push('BIG_SPREAD_FLAG — spread >=12: review Big Spread Rule before betting');
+  if(highTotalFlag) flags.push('HIGH_TOTAL_FLAG — total >=240: high volatility zone');
   const dt=document.querySelector('input[name="decisionType"]:checked')?.value||'';
   if(score!==null&&score!==undefined){
     if(dt==='PASS'&&score>=40) flags.push('BAND_MISMATCH — PASS selected, score='+score+' (PASS requires 0–39)');
     if(dt==='SIM'&&(score<40||score>=60)) flags.push('BAND_MISMATCH — SIM selected, score='+score+' (SIM requires 40–59)');
-    if(dt==='BET'&&score<60) flags.push('BAND_MISMATCH — BET selected, score='+score+' (BET requires ≥60)');
+    if(dt==='BET'&&score<60) flags.push('BAND_MISMATCH — BET selected, score='+score+' (BET requires >=60)');
   }
   const driftEl=document.getElementById('driftFlags');
   if(!driftEl) return;
@@ -2695,11 +2572,10 @@ function _checkDrift(score,betType,bigSpreadFlag,highTotalFlag,missing){
   }
 }
 
-// Legacy alias — kept so any existing calls resolve
 function updateConfidence(){computeConfidence();}
 
 // ══════════════════════════════════════════════════════════
-// COLLECT / SUBMIT
+// COLLECT / SUBMIT — PATCH 2 applied (bigSteamState fields added)
 // ══════════════════════════════════════════════════════════
 let editingId=null;
 let legacyMode=false;
@@ -2714,12 +2590,8 @@ function collectForm(){
   const tipFinal=document.getElementById('tipOffFinal').value||document.getElementById('tipOffTime').value||'';
   const away=getTeamAbbr(document.getElementById('awayTeam').value);
   const home=getTeamAbbr(document.getElementById('homeTeam').value);
-  // ── SSOT v3.4: raw inputs only, no derived fields, numerics as floats ──
-  // Derived fields (spreadMovePts/Abs/Direction, totalMovePts/Abs/Direction,
-  // juiceCents) are NOT persisted — recomputed live from raw inputs.
   const _confRaw=document.getElementById('confidence').value;
   const _isLegacy=legacyMode||(document.getElementById('legacyToggle')?.checked);
-  // rubricConfidence: numeric-or-null only. PARTIAL/— are display states, never stored.
   const rubricConfidence=(!_isLegacy&&_confRaw&&_confRaw!=='PARTIAL'&&_confRaw!=='—')
     ? (parseFloat(_confRaw)||null) : null;
   const legacyConfidence=_isLegacy
@@ -2732,31 +2604,25 @@ function collectForm(){
     decisionType:dt,liveMoneyFlag:dt==='BET'?document.getElementById('liveMoney').value:'N/A',
     betType:document.getElementById('betType').value,selection:document.getElementById('selection').value,
     odds:document.getElementById('odds').value,stake:document.getElementById('stake').value,
-    // ── Spread raw inputs (floats) ──
     openSpreadTeam:document.getElementById('openSpreadTeam').value.trim().toUpperCase(),
     openSpreadNum:parseFloat(document.getElementById('openSpreadNum').value)||null,
     currentSpreadTeam:document.getElementById('currentSpreadTeam').value.trim().toUpperCase(),
     currentSpreadNum:parseFloat(document.getElementById('currentSpreadNum').value)||null,
     closingSpread:document.getElementById('closingSpread').value,
-    // ── Total raw inputs (floats) ──
     openTotalNum:parseFloat(document.getElementById('openTotalNum').value)||null,
     currentTotalNum:parseFloat(document.getElementById('currentTotalNum').value)||null,
     closingTotal:document.getElementById('closingTotal').value,
-    // ── Market context ──
     moveType:document.getElementById('moveType').value,moveSpeed:document.getElementById('moveSpeed').value,
     multiBook:document.getElementById('multiBook').value,sharpBook:document.getElementById('sharpBook').value,
     lateMarketStatus:document.getElementById('lateMarketStatus').value,
     publicBetPct:document.getElementById('publicBetPct').value,publicMoneyPct:document.getElementById('publicMoneyPct').value,
     publicSide:document.getElementById('publicSide').value,publicSignalType:document.getElementById('publicSignalType').value,
-    // ── v3.5: Sharp Consensus Line (C1 Stale Book fix) ──
     sharpConsensusLine:parseFloat(document.getElementById('sharpConsensusLine')?.value)||null,
-    // ── Injury / signal ──
     injuryClass:document.getElementById('injuryClass').value,
-    injuryPlayer:'', // legacy compat — use injuryPlayers array
-    injuryPlayers:collectPlayerRows(), // v3.5: per-player rows
-    depletionAsymmetry:document.getElementById('depletionAsymmetry').value, // v3.5
-    signalOrigin:document.getElementById('signalOrigin').value, // v3.5
-    // ── v1.4 Signal Taxonomy fields ──
+    injuryPlayer:'',
+    injuryPlayers:collectPlayerRows(),
+    depletionAsymmetry:document.getElementById('depletionAsymmetry').value,
+    signalOrigin:document.getElementById('signalOrigin').value,
     movePhase:          document.getElementById('movePhase')?.value          || null,
     observedAfterMove:  document.getElementById('observedAfterMove')?.value  || null,
     sharpConfirmed:     document.getElementById('sharpConfirmed')?.value     || null,
@@ -2767,27 +2633,21 @@ function collectForm(){
     slateConsensusDirection:document.getElementById('slateConsensusDirection')?.value || null,
     signalWhat:document.getElementById('signalWhat').value,signalWhy:document.getElementById('signalWhy').value,
     signalInvalidates:document.getElementById('signalInvalidates').value,
-    // ── Scoring raw inputs (floats) — juiceCents NOT stored (derived) ──
     openOdds:parseFloat(document.getElementById('openOdds').value)||null,
     currentOdds:parseFloat(document.getElementById('odds').value)||null,
     moveDetectedAt:document.getElementById('moveDetectedAt').value,
     timingGate:document.getElementById('timingGate').value,
-    // ── Confidence: two distinct fields + v3.5 override fields ──
     rubricConfidence,
     legacyConfidence,
     entryType:_isLegacy?'LEGACY':'STANDARD',
-    // v3.5: Score Override Gate
     scoreOverrideActive:document.getElementById('scoreOverrideActive')?.checked||false,
     manualConfidence:document.getElementById('scoreOverrideActive')?.checked?(parseInt(document.getElementById('manualConfidence').value)||null):null,
     scoreOverrideBug:document.getElementById('scoreOverrideActive')?.checked?(document.getElementById('scoreOverrideBug').value||''):'',
-    // ── Protocol PASS fields (v3.5) ──
     protocolPassRule:dt==='PROTOCOL_PASS'?document.getElementById('protocolPassRule').value:'',
     protocolPassWouldHaveBeen:dt==='PROTOCOL_PASS'?document.getElementById('protocolPassWouldHaveBeen').value:'',
-    // ── Pass context ──
     passMarketType:document.getElementById('passMarketType').value,
     passCurrentOdds:document.getElementById('passCurrentOdds').value,
     passReason,
-    // ── Post-game ──
     finalScore:document.getElementById('finalScore').value,result:document.getElementById('result').value,
     netPnL:document.getElementById('netPnL').value,processTag:document.getElementById('processTag').value,
     passOfNote:document.getElementById('passOfNote').value,
@@ -2796,9 +2656,13 @@ function collectForm(){
     invalidationHappened:document.getElementById('invalidationHappened').value,
     invalidationType:document.getElementById('invalidationType').value,
     failureMode:document.getElementById('failureMode').value,
-
     varianceFlag: document.getElementById('varianceFlag') ? document.getElementById('varianceFlag').checked : false,
     failureDetail: document.getElementById('failureDetail') ? (document.getElementById('failureDetail').value||'').trim() : '',
+
+    // BP26-SPEC-20260409-01 — Market State & Signal Environment
+    bigSteamState:          (document.getElementById('bigSteamState')         ||{}).value||'NONE',
+    conditionalSignalStatus:(document.getElementById('conditionalSignalStatus')||{}).value||'NONE',
+    signalEnvironmentTags:  Array.from((document.getElementById('signalEnvironmentTags')||{}).selectedOptions||[]).map(function(o){return o.value;}),
 
     learningNote:document.getElementById('learningNote').value,
     preGameNotes:document.getElementById('preGameNotes').value,
@@ -2824,24 +2688,21 @@ function onLegacyToggle(){
 }
 
 async function submitEntry(){
-  // BP26-SPEC-20260330-01: FMTS validation
   var _dt = document.querySelector('input[name="decisionType"]:checked');
   var _dtVal = _dt ? _dt.value : '';
   var _res = (document.getElementById('result')||{}).value||'';
   var _isLoss = _res.toLowerCase().indexOf('loss') > -1;
   if((_dtVal==='SIM'||_dtVal==='BET') && _isLoss) {
     var _fm = (document.getElementById('failureMode')||{}).value||'';
-    var _fd = ((document.getElementById('failureDetail')||{}).value||''). trim();
+    var _fd = ((document.getElementById('failureDetail')||{}).value||'').trim();
     if(!_fm){toast('Failure Mode required for SIM/BET losses (BP26-SPEC-20260330-01)','error');return;}
     if(!_fd||_fd.length<5){toast('Failure Detail required for SIM/BET losses','error');return;}
   }
 
   if(postGameMode){
-    // ══ POSTGAME HARD GATES (Enforcement §4) ═════════════
     if(!document.getElementById('finalScore').value.trim()){toast('[HARD STOP] Final Score required (§12)','error');return;}
     if(!document.getElementById('result').value){toast('[HARD STOP] Result required (§12)','error');return;}
     if(!document.getElementById('processTag').value){toast('[HARD STOP] Process Tag required (§12)','error');return;}
-    // Closing line required for BET/SIM
     const _pgCheck=await loadEntries();
     const _pgE=_pgCheck.find(e=>e.betId===postGameId);
     if(_pgE&&(_pgE.decisionType==='BET'||_pgE.decisionType==='SIM')){
@@ -2849,7 +2710,6 @@ async function submitEntry(){
       const ct=document.getElementById('closingTotal').value.trim();
       if(!cs&&!ct){toast('[HARD STOP] Closing Line required for BET/SIM (§12) — enter closing spread or total','error');return;}
     }
-    // If Failure Mode set → Learning Note required (Enforcement §4)
     if(document.getElementById('failureMode').value&&!document.getElementById('learningNote').value.trim()){
       toast('[HARD STOP] Learning Note required when Failure Mode is selected (§15)','error');return;
     }
@@ -2888,20 +2748,15 @@ async function submitEntry(){
     return;
   }
 
-  // ══ PREGAME HARD GATES — BP26 Enforcement Spec v1.0 ══
   const dt=document.querySelector('input[name="decisionType"]:checked')?.value;
   if(!dt){toast('Select a decision type: BET / SIM / PASS / PROTOCOL PASS','error');return;}
   if(!document.getElementById('date').value){toast('Date required','error');return;}
   if(!document.getElementById('awayTeam').value||!document.getElementById('homeTeam').value){toast('Away and home team required','error');return;}
-  // Team mismatch hard stop (Fix 1 / v3.4)
   const _ost=document.getElementById('openSpreadTeam').value.trim().toUpperCase();
   const _cst=document.getElementById('currentSpreadTeam').value.trim().toUpperCase();
-  if(_ost&&_cst&&_ost!==_cst){toast('[HARD STOP] Open spread team ('+_ost+') ≠ Current spread team ('+_cst+'). Log spread from same-team perspective.','error');return;}
-
-  // PASS / PROTOCOL_PASS hard stops
+  if(_ost&&_cst&&_ost!==_cst){toast('[HARD STOP] Open spread team ('+_ost+') != Current spread team ('+_cst+'). Log spread from same-team perspective.','error');return;}
   const betTypeVal=document.getElementById('betType').value;
   const isNonePassType=betTypeVal==='NONE_PASS';
-
   if(dt==='PASS'||dt==='PROTOCOL_PASS'){
     if(!document.getElementById('passReason').value){toast('[HARD STOP] PASS requires Pass Reason (§11)','error');return;}
     if(!document.getElementById('odds').value.trim()){toast('[HARD STOP] Current Odds required for confidence scoring (§03/§10) — enter observed market odds','error');return;}
@@ -2909,8 +2764,6 @@ async function submitEntry(){
       toast('[HARD STOP] Protocol Pass requires Rule Trigger citation (§02)','error');return;
     }
   }
-
-  // BET/SIM hard stops — NONE_PASS not valid for executed decisions
   if(dt==='BET'||dt==='SIM'){
     if(!betTypeVal||isNonePassType){toast('[HARD STOP] BET/SIM requires a specific Bet Type — None/PASS not allowed here','error');return;}
     if(!document.getElementById('selection').value.trim()){toast('[HARD STOP] Selection required (§03)','error');return;}
@@ -2921,15 +2774,11 @@ async function submitEntry(){
     if(!document.getElementById('signalWhy').value.trim()){toast('[HARD STOP] Signal WHY required (§09)','error');return;}
     if(!document.getElementById('signalInvalidates').value.trim()){toast('[HARD STOP] Signal INVALIDATES required (§09)','error');return;}
   }
-
-  // ══ CONFIDENCE HARD GATES (Rubric Key v1.0) ══════════
-  // LEGACY MODE: bypass all rubric gates for pre-rubric historical entries
   if(!legacyMode){
     const confRaw=document.getElementById('confidence').value;
     if(!confRaw||confRaw==='—'||confRaw==='PARTIAL'){
       toast('[HARD STOP] Confidence is PARTIAL_INVALID — complete all required scoring inputs in §10','error');return;
     }
-    // v3.5: Use effective score — manual override if active, else logger
     const overrideOn=document.getElementById('scoreOverrideActive')?.checked;
     let score;
     if(overrideOn){
@@ -2940,8 +2789,6 @@ async function submitEntry(){
       score=parseInt(confRaw,10);
       if(isNaN(score)){toast('[HARD STOP] Confidence score invalid — check §10 inputs','error');return;}
     }
-
-    // Band Alignment Gate — blocking, not a warning (Enforcement §2)
     if(dt==='PASS'&&score>=40){
       toast('[BAND GATE] BLOCKED: PASS requires score 0–39. Current='+score+'. Re-evaluate signal or change decision type.','error');return;
     }
@@ -2949,10 +2796,8 @@ async function submitEntry(){
       toast('[BAND GATE] BLOCKED: SIM requires score 40–59. Current='+score+'.','error');return;
     }
     if(dt==='BET'&&score<60){
-      toast('[BAND GATE] BLOCKED: BET requires score ≥60. Current='+score+'. Downgrade to SIM or PASS.','error');return;
+      toast('[BAND GATE] BLOCKED: BET requires score >=60. Current='+score+'. Downgrade to SIM or PASS.','error');return;
     }
-
-    // Required scoring inputs (SSOT §5 / Enforcement §1)
     const missingR=[];
     if(!document.getElementById('moveType').value) missingR.push('Move Type (§07)');
     if(!document.getElementById('moveSpeed').value) missingR.push('Move Speed (§07)');
@@ -2974,13 +2819,12 @@ async function submitEntry(){
   clearForm();refreshLedger();
 }
 
+// PATCH 4: populateFormFromEntry with bigSteamState + multi-select restore
 function populateFormFromEntry(e){
-  // Date
   if(e.date){
     const[y,m,d]=e.date.split('-').map(Number);
     calYear=y;calMonth=m-1;calSelectedDate=new Date(y,m-1,d);setCalValue(calSelectedDate);renderCal();
   }
-  // Tip-off
   if(e.tipOffTime){
     let found=false;
     for(let o of document.getElementById('tipOffSelect').options){
@@ -2989,24 +2833,20 @@ function populateFormFromEntry(e){
     if(!found){document.getElementById('tipOffSelect').value='OTHER';document.querySelector('.tipoff-manual').style.display='block';document.getElementById('tipOffTime').value=e.tipOffTime;}
     document.getElementById('tipOffFinal').value=e.tipOffTime;
   }
-  // Teams — match by abbreviation prefix
   ['awayTeam','homeTeam'].forEach(id=>{
     const abbr=e[id==='awayTeam'?'awayTeam':'homeTeam'];
     const sel=document.getElementById(id);
     for(let o of sel.options){if(o.value.startsWith(abbr)){sel.value=o.value;break;}}
   });
   updateMatchup();
-  // Set radio button WITHOUT triggering onDecisionChange yet
   const radio=document.querySelector(`input[name="decisionType"][value="${e.decisionType}"]`);
   if(radio) radio.checked=true;
-  // Show/hide sections manually so onDecisionChange side-effects don't wipe fields mid-populate
   const dt=e.decisionType||'';
   document.getElementById('passSection').style.display=dt==='PASS'?'block':'none';
   document.getElementById('liveMoneyRow').style.display=dt==='BET'?'block':'none';
   document.getElementById('betSelectionSection').style.display='block';
   const sec3badge=document.getElementById('sec3badge');
   if(sec3badge) sec3badge.textContent=dt==='PASS'?'SIGNAL CONTEXT FOR SCORING':'REQUIRED';
-  // All standard fields — set BEFORE calling any compute functions
   const fields=['betType','selection','odds','stake',
     'openSpreadTeam','openSpreadNum','currentSpreadTeam','currentSpreadNum','closingSpread',
     'openTotalNum','currentTotalNum','closingTotal',
@@ -3017,37 +2857,36 @@ function populateFormFromEntry(e){
     'passReason','finalScore','result','netPnL','processTag','passOfNote',
     'clvSpread','clvTotal','invalidationHappened','invalidationType','failureMode','learningNote',
     'preGameNotes','postGameNotes',
-    'depletionAsymmetry','sharpConsensusLine','protocolPassRule','protocolPassWouldHaveBeen'];
+    'depletionAsymmetry','sharpConsensusLine','protocolPassRule','protocolPassWouldHaveBeen',
+    'bigSteamState','conditionalSignalStatus'];
   fields.forEach(f=>{
     const el=document.getElementById(f);
     if(el&&e[f]!==undefined&&e[f]!==null) el.value=e[f];
   });
-  // Confidence is readonly — set stored value directly, then recompute
+  // BP26-SPEC-20260409-01: multi-select restore for signalEnvironmentTags
+  var _setEl=document.getElementById('signalEnvironmentTags');
+  if(_setEl&&Array.isArray(e.signalEnvironmentTags)){
+    Array.from(_setEl.options).forEach(function(o){o.selected=e.signalEnvironmentTags.indexOf(o.value)>-1;});
+  }
   const confEl=document.getElementById('confidence');
   if(confEl&&e.confidence!==undefined) confEl.value=e.confidence;
-  // Restore NONE_PASS field visibility after fields are populated
   const _bt=document.getElementById('betType').value;
   const _nonePass=_bt==='NONE_PASS';
-  // oddsField always visible — required for confidence scoring
   ['selectionField','stakeField'].forEach(id=>{
     const el=document.getElementById(id);
     if(el) el.style.display=_nonePass?'none':'';
   });
   const _ol2=document.querySelector('#oddsField label');
   if(_ol2) _ol2.textContent=_nonePass?'Current Odds (§10 scoring required)':'Odds';
-  // Now run compute chain after all fields are set
   computeMoves();
   computeTimingGate();
-  // v3.5: Populate player rows
   if(Array.isArray(e.injuryPlayers)&&e.injuryPlayers.length>0){
     populatePlayerRows(e.injuryPlayers);
   } else if(e.injuryPlayer){
-    // Migrate legacy single-string injuryPlayer
     populatePlayerRows([{name:e.injuryPlayer,status:'',bp26Class:'',bakedTest:'',minsFlag:'NONE'}]);
   } else {
     populatePlayerRows([]);
   }
-  // v3.5: Restore score override gate
   const soActive=document.getElementById('scoreOverrideActive');
   const soFields=document.getElementById('scoreOverrideFields');
   const soNote=document.getElementById('overrideActiveNote');
@@ -3064,16 +2903,13 @@ function populateFormFromEntry(e){
       if(sbEl)sbEl.value=e.scoreOverrideBug;
     }
   }
-  // v3.5: Show protocol pass section if applicable
   if(e.decisionType==='PROTOCOL_PASS'){
     const pp=document.getElementById('protocolPassSection');
     if(pp)pp.style.display='block';
   }
-  // FIX 3: For legacy entries, display stored legacyConfidence instead of running scorer
   if(e.entryType==='LEGACY'){
     const confEl=document.getElementById('confidence');
     const lt=document.getElementById('legacyToggle');
-    // Set legacyMode so computeConfidence shows LEGACY, not PARTIAL
     legacyMode=true;
     if(lt)lt.checked=true;
     const lw=document.getElementById('legacyWarning');if(lw)lw.style.display='block';
@@ -3094,24 +2930,16 @@ function populateFormFromEntry(e){
 
 async function openEditMode(betId,event){
   if(event)event.stopPropagation();
-
-  // Load entry — async/await for clean sequencing
   const entries=await loadEntries();
   const e=entries.find(x=>x.betId===betId);
   if(!e){toast('Entry not found — try refreshing the ledger','error');return;}
-
-  // State
   editingId=betId;
   postGameMode=false;
   postGameId=null;
-
-  // Switch to log tab
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
   document.getElementById('tab-log').classList.add('active');
   document.getElementById('tabLog').classList.add('active');
-
-  // Clear any post-game banner / locks before populating
   const banner=document.getElementById('pgBanner');
   if(banner)banner.classList.remove('active');
   document.querySelectorAll('.pre-game-section').forEach(sec=>{
@@ -3121,11 +2949,7 @@ async function openEditMode(betId,event){
       el.disabled=false;el.style.opacity='';el.style.cursor='';
     });
   });
-
-  // Populate all fields from stored entry
   populateFormFromEntry(e);
-
-  // Unlock post-game fields (edit mode = full access)
   ['finalScore','processTag','invalidationHappened','invalidationType','failureMode','learningNote'].forEach(id=>{
     const el=document.getElementById(id);
     if(el){el.disabled=false;el.style.opacity='';el.style.cursor='';}
@@ -3135,8 +2959,6 @@ async function openEditMode(betId,event){
   ['invalidationHappenedHint','invalidationTypeHint','failureModeHint','learningNoteHint'].forEach(id=>{
     const el=document.getElementById(id);if(el)el.textContent='';
   });
-
-  // UI
   document.getElementById('editingNote').textContent='✏️ EDIT MODE — '+e.matchup+' ('+e.date+') — all fields editable';
   document.getElementById('submitBtn').textContent='💾 SAVE EDITS';
   document.getElementById('clearBtn').style.display='';
@@ -3144,6 +2966,7 @@ async function openEditMode(betId,event){
   toast('✏️ Edit mode: '+e.matchup,'success');
 }
 
+// PATCH 3: clearForm with BP26-SPEC-20260409-01 resets
 function clearForm(){
   editingId=null;postGameId=null;legacyMode=false;
   const _lt=document.getElementById('legacyToggle');if(_lt)_lt.checked=false;
@@ -3163,7 +2986,7 @@ function clearForm(){
    'publicBetPct','publicMoneyPct','publicSide','publicSignalType',
    'injuryPlayer','signalWhat','signalWhy','signalInvalidates','openOdds','moveDetectedAt','passReason','learningNote','clvSpread','clvTotal',
    'finalScore','preGameNotes','postGameNotes'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
-  document.getElementById('stake').value='0'; // confidence reset handled below by formula reset block
+  document.getElementById('stake').value='0';
   document.getElementById('injuryClass').value='NONE';document.getElementById('result').value='Pending';
   document.getElementById('netPnL').value='';document.getElementById('processTag').value='';
   document.getElementById('timingGate').value='';
@@ -3174,7 +2997,6 @@ function clearForm(){
   const ps=document.getElementById('passScoringSection');if(ps)ps.style.display='none';
   const pm=document.getElementById('passMarketType');if(pm)pm.value='';
   const pc=document.getElementById('passCurrentOdds');if(pc)pc.value='';
-  // v3.5 resets
   populatePlayerRows([]);
   const da=document.getElementById('depletionAsymmetry');if(da)da.value='N/A';
   const so=document.getElementById('signalOrigin');if(so)so.value='';
@@ -3183,7 +3005,6 @@ function clearForm(){
   const ppS=document.getElementById('protocolPassSection');if(ppS)ppS.style.display='none';
   const ppR=document.getElementById('protocolPassRule');if(ppR)ppR.value='';
   const ppW=document.getElementById('protocolPassWouldHaveBeen');if(ppW)ppW.value='';
-  // Score Override Gate reset
   const soActive=document.getElementById('scoreOverrideActive');if(soActive)soActive.checked=false;
   const soFields=document.getElementById('scoreOverrideFields');if(soFields)soFields.style.display='none';
   const soNote=document.getElementById('overrideActiveNote');if(soNote)soNote.style.display='none';
@@ -3191,6 +3012,10 @@ function clearForm(){
   const lcd=document.getElementById('loggerConfidenceDisplay');if(lcd)lcd.value='';
   const od=document.getElementById('overrideDelta');if(od){od.value='';od.style.color='';}
   const sob=document.getElementById('scoreOverrideBug');if(sob)sob.value='';
+  // BP26-SPEC-20260409-01 resets
+  var _bss=document.getElementById('bigSteamState');if(_bss)_bss.value='NONE';
+  var _css=document.getElementById('conditionalSignalStatus');if(_css)_css.value='NONE';
+  var _set=document.getElementById('signalEnvironmentTags');if(_set)Array.from(_set.options).forEach(function(o){o.selected=false;});
   document.getElementById('confidence').value='—';
   document.getElementById('confidence').className='';
   document.getElementById('confDisplay').textContent='Complete all required inputs to generate score';
@@ -3213,8 +3038,7 @@ function clearForm(){
 }
 
 // ══════════════════════════════════════════════════════════
-// SCHEMA v2 MIGRATION (Fix 2C / v3.4)
-// Never runs silently. Requires explicit click. Backup-first.
+// SCHEMA MIGRATION — PATCH 5 applied (new field defaults)
 // ══════════════════════════════════════════════════════════
 async function checkMigrationNeeded(){
   const entries=await loadEntries();
@@ -3233,8 +3057,6 @@ async function runMigration(){
   const entries=await loadEntries();
   const needsMigration=entries.filter(e=>!e.schemaVersion||e.schemaVersion<3);
   if(needsMigration.length===0){toast('No migration needed — all entries are schema v2','success');return;}
-
-  // Step 1: Download timestamped backup BEFORE any write
   const ts=new Date().toISOString().replace(/[:.]/g,'-');
   const backupData=JSON.stringify(entries,null,2);
   const blob=new Blob([backupData],{type:'application/json'});
@@ -3243,20 +3065,13 @@ async function runMigration(){
   a.download=`BP26_pre_migration_backup_${ts}.json`;
   a.click();
   toast('📥 Pre-migration backup downloaded — proceeding with migration...','success');
-
-  // Step 2: Migrate each entry
   const DERIVED_FIELDS=['spreadMovePts','spreadMoveAbs','spreadMoveDirection',
     'totalMovePts','totalMoveAbs','totalMoveDirection','juiceCents',
     'openSpread','currentSpread','openTotal','currentTotal'];
-
   let updated=0;
   const migrated=entries.map(e=>{
     if(e.schemaVersion>=3) return e;
     const m={...e};
-    // v2 migrations (existing)
-    const DERIVED_FIELDS=['spreadMovePts','spreadMoveAbs','spreadMoveDirection',
-      'totalMovePts','totalMoveAbs','totalMoveDirection','juiceCents',
-      'openSpread','currentSpread','openTotal','currentTotal'];
     if(!e.schemaVersion||e.schemaVersion<2){
       DERIVED_FIELDS.forEach(f=>delete m[f]);
       ['openSpreadNum','currentSpreadNum','openTotalNum','currentTotalNum','openOdds'].forEach(f=>{
@@ -3269,9 +3084,7 @@ async function runMigration(){
         delete m.confidence;
       }
     }
-    // v3 migrations (v3.5 new fields)
     if(!e.schemaVersion||e.schemaVersion<3){
-      // injuryPlayer (string) → injuryPlayers (array)
       if(!Array.isArray(m.injuryPlayers)){
         m.injuryPlayers=m.injuryPlayer?[{name:m.injuryPlayer,status:'',bp26Class:'',bakedTest:'',minsFlag:'NONE'}]:[];
       }
@@ -3283,13 +3096,15 @@ async function runMigration(){
       if(m.scoreOverrideBug===undefined) m.scoreOverrideBug='';
       if(m.protocolPassRule===undefined) m.protocolPassRule='';
       if(m.protocolPassWouldHaveBeen===undefined) m.protocolPassWouldHaveBeen='';
+      // BP26-SPEC-20260409-01 defaults
+      if(m.bigSteamState===undefined) m.bigSteamState='NONE';
+      if(m.conditionalSignalStatus===undefined) m.conditionalSignalStatus='NONE';
+      if(!Array.isArray(m.signalEnvironmentTags)) m.signalEnvironmentTags=[];
     }
     m.schemaVersion=3;
     updated++;
     return m;
   });
-
-  // Step 3: Save migrated entries
   await saveEntries(migrated);
   document.getElementById('migrationBanner').style.display='none';
   refreshLedger();
@@ -3318,7 +3133,6 @@ async function refreshLedger(){
       if(!isNaN(v))realPnL+=v;
     }
   });
-  // Backfill CLV on entries for stats bar too
   entries.forEach(e=>{
     if(!e.clvSpread&&e.closingSpread&&e.selection){
       const d=extractSpreadNumber(e.selection),cl=extractSpreadNumber(e.closingSpread);
@@ -3344,7 +3158,6 @@ async function refreshLedger(){
     <div class="stat"><strong style="color:${pnlC}">${pnlStr}</strong>Real P&L</div>
     <div class="stat"><strong style="color:${clvC}">${clvStr}</strong>Avg CLV</div>
   `;
-  // Back-fill CLV display from stored selection+closingSpread for entries saved before CLV was built
   entries.forEach(e=>{
     if(!e.clvSpread&&e.closingSpread&&e.selection){
       const d=extractSpreadNumber(e.selection);
@@ -3407,11 +3220,10 @@ async function refreshLedger(){
       <td style="color:var(--amber)">${(()=>{
         if(e.entryType==='LEGACY'){
           return e.legacyConfidence!=null
-            ? '<span title="Legacy confidence">'+e.legacyConfidence+'<span style=\"font-size:8px;color:var(--text3);margin-left:3px\">L</span></span>'
-            : '<span style=\"font-size:9px;color:var(--text3)\">LEGACY</span>';
+            ? '<span title="Legacy confidence">'+e.legacyConfidence+'<span style="font-size:8px;color:var(--text3);margin-left:3px">L</span></span>'
+            : '<span style="font-size:9px;color:var(--text3)">LEGACY</span>';
         }
         if(e.rubricConfidence!=null) return e.rubricConfidence;
-        // Fallback for pre-migration entries that still have old confidence field
         if(e.confidence&&e.confidence!=='PARTIAL'&&e.confidence!=='—') return e.confidence;
         return '—';
       })()}</td>
@@ -3430,7 +3242,7 @@ async function refreshLedger(){
 }
 
 // ══════════════════════════════════════════════════════════
-// EXPORT
+// EXPORT — PATCH 8 applied (3 new columns in exportExcel)
 // ══════════════════════════════════════════════════════════
 async function exportExcel(){
   const entries=await loadEntries();
@@ -3446,7 +3258,11 @@ async function exportExcel(){
     ['Total Δ Pts','totalMovePts'],['Total Δ Abs','totalMoveAbs'],['Total Move Dir','totalMoveDirection'],
     ['Move Type','moveType'],['Move Speed','moveSpeed'],['Multi-Book','multiBook'],['Sharp Book','sharpBook'],
     ['Late Market Status','lateMarketStatus'],
-    ['Public Bet %','publicBetPct'],['Public Money %','publicMoneyPct'],['Public Side','publicSide'],['Public Signal Type','publicSignalType'],
+    ['Public Bet %','publicBetPct'],['Public Money %','publicMoneyPct'],['Public Side','publicSide'],
+    ['Public Signal Type','publicSignalType'],
+    ['Big Steam State','bigSteamState'],
+    ['Conditional Signal Status','conditionalSignalStatus'],
+    ['Signal Environment Tags','signalEnvironmentTags'],
     ['Injury Class','injuryClass'],['Injury Player','injuryPlayer'],
     ['Signal WHAT','signalWhat'],['Signal WHY','signalWhy'],['Signal INVALIDATES','signalInvalidates'],
     ['Confidence','confidence'],['Open Odds','openOdds'],['Juice Cents','juiceCents'],['Move Detected At','moveDetectedAt'],['Timing Gate','timingGate'],['Pass Reason','passReason'],
@@ -3458,9 +3274,17 @@ async function exportExcel(){
     ['Pre-Game Notes','preGameNotes'],['Post-Game Notes','postGameNotes'],
     ['Post-Game At','postGameAt'],['Decision At','decisionAt'],['Created At','createdAt']
   ];
-  const rows=entries.map(e=>{const row={};cols.forEach(([h,k])=>row[h]=e[k]||'');return row;});
+  const rows=entries.map(e=>{
+    const row={};
+    cols.forEach(([h,k])=>{
+      const v=e[k];
+      // Handle arrays (signalEnvironmentTags) — join as comma-separated string
+      row[h]=Array.isArray(v)?v.join(', '):(v||'');
+    });
+    return row;
+  });
   const wb=XLSX.utils.book_new(),ws=XLSX.utils.json_to_sheet(rows);
-  ws['!cols']=cols.map(([h])=>({wch:['Pre-Game Notes','Post-Game Notes','Signal WHAT','Signal WHY','Signal INVALIDATES','Sharp Book','Injury Player'].includes(h)?50:h.length<8?10:16}));
+  ws['!cols']=cols.map(([h])=>({wch:['Pre-Game Notes','Post-Game Notes','Signal WHAT','Signal WHY','Signal INVALIDATES','Sharp Book','Injury Player','Signal Environment Tags'].includes(h)?50:h.length<8?10:16}));
   XLSX.utils.book_append_sheet(wb,ws,'BP26_Ledger');
   XLSX.writeFile(wb,`BP26_Ledger_${new Date().toISOString().slice(0,10)}.xlsx`);
   toast('✅ Excel exported','success');
@@ -3543,12 +3367,11 @@ window.addEventListener('load',async()=>{
   initCal();const ts=await autoBackup();updateBackupStatus(ts);refreshLedger();updateBackupInfo();updateConfidence();
   await checkMigrationNeeded();
 });
-// ── v1.4 Totals Structure Filter + Confirmation Pricing auto-warn ──
+
+// v1.4 Totals Structure Filter
 function v14_checkWarnings() {
   const movePhase = document.getElementById('movePhase')?.value || '';
   const totalsFlags = document.getElementById('totalsFilterFlags')?.value || '';
-
-  // Confirmation Pricing Test
   const cpWarn = document.getElementById('confirmPricingWarn');
   if (cpWarn) {
     if (movePhase === 'POST_CONFIRMATION') {
@@ -3558,8 +3381,6 @@ function v14_checkWarnings() {
       cpWarn.style.display = 'none';
     }
   }
-
-  // Totals Structure Filter
   const tfWarn = document.getElementById('totalsFilterWarn');
   if (tfWarn) {
     const flagCount = totalsFlags.split(',').filter(f => f && f !== 'None / N/A').length;
@@ -3575,363 +3396,266 @@ function v14_checkWarnings() {
   }
 }
 
-// Wire up listeners
 document.addEventListener('DOMContentLoaded', function() {
   document.getElementById('movePhase')?.addEventListener('change', v14_checkWarnings);
   document.getElementById('totalsFilterFlags')?.addEventListener('change', v14_checkWarnings);
 });
 </script>
-<!-- ============================================================
-     BP26 VALIDATION LAYER v1.1 — BP26-SPEC-20260401-01 + BP26-SPEC-20260406-01
-     Corrections applied: 4/1/26
-     ============================================================ -->
+
 <script>
-(function () {
+/* ============================================================
+   BP26 VALIDATION LAYER v1.2 — BP26-SPEC-20260401-01 + BP26-SPEC-20260406-01 + BP26-SPEC-20260409-01
+   Corrections applied: 4/1/26 | Updated: 4/9/26 (BP26-SPEC-20260409-01)
+   ============================================================ */
+
+(function() {
   'use strict';
 
-  // ─── STATE ──────────────────────────────────────────────────
-  // Schema keys used consistently: validationStatus / validationErrors
-  window.bp26_validationState = {
-    validationStatus: null,
-    validationErrors: []
-  };
+  /* ── VALIDATION RULES ─────────────────────────────────── */
 
-  // ─── VALIDATION ENGINE ───────────────────────────────────────
-  // Deterministic. No side effects. Returns result object only.
-  window.bp26_runValidation = function () {
+  function bp26_runValidation() {
     var errors = [];
 
-    var asymmetry        = document.getElementById('val_asymmetry').value;
-    var mechanism        = document.getElementById('val_mechanism').value;
-    var expectedVsActual = document.getElementById('val_expectedVsActual').value;
-    var confirmation     = document.getElementById('val_confirmation').value;
-    var cvsChecked       = document.getElementById('val_cvs').checked;
-    var decisionRadio    = document.querySelector('input[name="decisionType"]:checked');
-    var decisionType     = decisionRadio ? decisionRadio.value : '';
+    var decisionType = (function() {
+      var r = document.querySelector('input[name="decisionType"]:checked');
+      return r ? r.value : '';
+    })();
 
-    var textContent = [
-      document.getElementById('signalWhat').value        || '',
-      document.getElementById('signalWhy').value         || '',
-      document.getElementById('signalInvalidates').value || '',
-      document.getElementById('preGameNotes').value      || '',
-      document.getElementById('postGameNotes').value     || '',
-      document.getElementById('failureDetail').value     || ''
-    ].join(' ').toLowerCase();
+    var betType = (document.getElementById('betType') || {}).value || '';
+    var asymmetry = (document.getElementById('val_asymmetry') || {}).value || '';
+    var mechanism = (document.getElementById('val_mechanism') || {}).value || '';
+    var expectedVsActual = (document.getElementById('val_expectedVsActual') || {}).value || '';
+    var confirmation = (document.getElementById('val_confirmation') || {}).value || '';
+    var cvs = (document.getElementById('val_cvs') || {}).checked || false;
 
-    // RULE V1 — Structure Enforcement
-    if (!asymmetry)        errors.push('V1: Asymmetry is required');
-    if (!mechanism)        errors.push('V1: Mechanism is required');
-    if (!expectedVsActual) errors.push('V1: Expected vs Actual Move is required');
-    if (!confirmation)     errors.push('V1: Confirmation is required');
-    if (!decisionType)     errors.push('V1: Classification (decisionType) is required');
+    var spreadMovePts = parseFloat((document.getElementById('spreadMovePts') || {}).value) || 0;
+    var totalMovePts = parseFloat((document.getElementById('totalMovePts') || {}).value) || 0;
+    var openTotalNum = parseFloat((document.getElementById('openTotalNum') || {}).value) || 0;
 
-    // RULE V2 — Mechanism required for SIM/BET
-    if ((decisionType === 'SIM' || decisionType === 'BET') && mechanism !== 'CLEAR') {
-      errors.push('V2: SIM/BET requires Mechanism = CLEAR');
+    var lateMarketStatus = (document.getElementById('lateMarketStatus') || {}).value || '';
+    var passReason = (document.getElementById('passReason') || {}).value || '';
+
+    // ── RULE V1: expectedVsActual must not be GONE for SIM/BET ──
+    if ((decisionType === 'SIM' || decisionType === 'BET') && expectedVsActual === 'GONE') {
+      errors.push('V1: Expected vs Actual Move is GONE — signal has evaporated. Reclassify as PASS.');
     }
 
-    // RULE V3 — Expected vs Actual Move on every entry
-    if (!expectedVsActual) {
-      errors.push('V3: Expected vs Actual Move must be set on every entry');
+    // ── RULE V2: asymmetry required for SIM/BET ──
+    if ((decisionType === 'SIM' || decisionType === 'BET') && (!asymmetry || asymmetry === '')) {
+      errors.push('V2: Asymmetry field required for SIM/BET decisions.');
+    }
+    if ((decisionType === 'SIM' || decisionType === 'BET') && asymmetry === 'NO') {
+      errors.push('V2: No asymmetry detected — no edge identified. Reclassify as PASS.');
     }
 
-    // RULE V4 — CVS Compliance
-    if (!cvsChecked) {
-      errors.push('V4: CVS — confirm all factual claims are verified before proceeding');
+    // ── RULE V3: mechanism must be CLEAR for SIM/BET ──
+    if ((decisionType === 'SIM' || decisionType === 'BET') && mechanism === 'UNCLEAR') {
+      errors.push('V3: Mechanism is UNCLEAR — edge source not identified. Reclassify as PASS or clarify mechanism.');
+    }
+    if ((decisionType === 'SIM' || decisionType === 'BET') && (!mechanism || mechanism === '')) {
+      errors.push('V3: Mechanism field required for SIM/BET decisions.');
     }
 
-    // RULE V5 — Narrative Drift Prohibition
-    // Expanded 4/1/26: added elite, terrible, awful, strong team, weak team
-    var prohibited = [
-      'good team', 'bad team', 'dominant', 'tank team',
-      'should win', 'better team', 'record mismatch', 'market is correct',
-      'elite', 'terrible', 'awful', 'strong team', 'weak team'
-    ];
-    prohibited.forEach(function (term) {
-      if (textContent.indexOf(term) !== -1) {
-        errors.push('V5: Prohibited language detected — "' + term + '"');
+    // ── RULE V4: CVS attestation required ──
+    if (!cvs) {
+      errors.push('V4: CVS Attestation not checked — confirm all factual claims are verified.');
+    }
+
+    // ── RULE V5: BUYBACK/FLIP late market with SIM/BET ──
+    if ((decisionType === 'SIM' || decisionType === 'BET') &&
+        (lateMarketStatus === 'BUYBACK' || lateMarketStatus === 'FLIP')) {
+      errors.push('V5: Late Market Status is ' + lateMarketStatus + ' — signal is reversing. Reclassify as PASS.');
+    }
+
+    // ── RULE V6: PASS requires pass reason ──
+    if ((decisionType === 'PASS' || decisionType === 'PROTOCOL_PASS') && (!passReason || passReason === '')) {
+      errors.push('V6: PASS decision requires a Pass Reason selection (§11).');
+    }
+
+    // ── RULE V7: Totals UNDER Scrutiny Default ──
+    var isTotal = (betType === 'Total' || betType === 'TOTAL' || betType === 'Total (O/U)');
+    var selection = ((document.getElementById('selection') || {}).value || '').toUpperCase();
+    var isUnder = /^(UNDER|U)\s/.test(selection);
+    if ((decisionType === 'SIM' || decisionType === 'BET') && isTotal && isUnder) {
+      var totalMoveAbs = Math.abs(totalMovePts);
+      if (totalMoveAbs < 2.0) {
+        errors.push('V7: UNDER on totals — move <2.0 pts. UNDER Scrutiny Default: require ≥2.0 pt DOWN move or additional sharp confirmation.');
       }
-    });
-
-    // RULE V6 — Gate Misuse Prevention
-    // Corrected 4/1/26: PASS requires both signalWhat AND signalWhy
-    if (decisionType === 'PASS') {
-      var signalWhat = (document.getElementById('signalWhat').value || '').trim();
-      var signalWhy  = (document.getElementById('signalWhy').value  || '').trim();
-      if (!signalWhat || !signalWhy) {
-        errors.push('V6: PASS requires full evaluation — signalWhat and signalWhy must be completed');
-      }
     }
 
-    // RULE V7 — Expected vs Actual Move Gate (BP26-SPEC-20260406-01)
-    // Effective: 2026-04-06 | Approved: Jason Ciannello | Atlas: ✔ | Claude: ✔
-    // Priority: sits above confidence scoring — NEUTRAL edge = no residual mispricing = PASS mandatory
+    // RULE V8 — Big Steam State required when move >=3.0 pts (BP26-SPEC-20260409-01)
+    var spreadAbsV8 = parseFloat((document.getElementById('spreadMoveAbs')||{}).value) || 0;
+    var totalAbsV8  = parseFloat((document.getElementById('totalMoveAbs') ||{}).value) || 0;
+    var bigSteamV8  = ((document.getElementById('bigSteamState')||{}).value||'').trim();
+    if ((spreadAbsV8 >= 3.0 || totalAbsV8 >= 3.0) && (!bigSteamV8 || bigSteamV8 === 'NONE')) {
+      errors.push('V8: Move >=3.0 pts detected — bigSteamState classification required (BP26-SPEC-20260409-01)');
+    }
+
+    // RULE V8b — CONDITIONAL_SIGNAL cannot bypass confirmation for SIM/BET (BP26-SPEC-20260409-01)
     if (decisionType === 'SIM' || decisionType === 'BET') {
-      var evamEl = document.getElementById('val_expectedVsActual');
-      var evamVal = (evamEl ? evamEl.value || '' : '').trim();
-      if (evamVal === 'NEUTRAL') {
-        errors.push('V7: expectedVsActualMove = NEUTRAL — edge absorbed, classification must be PASS regardless of confidence score (BP26-SPEC-20260406-01)');
+      var condSigV8 = ((document.getElementById('conditionalSignalStatus')||{}).value||'').trim();
+      if (condSigV8 === 'CONDITIONAL_SIGNAL' && (!confirmation || confirmation === 'NONE')) {
+        errors.push('V8b: CONDITIONAL_SIGNAL active — partial or strong confirmation still required for SIM/BET (BP26-SPEC-20260409-01)');
       }
     }
 
     // Deduplicate (V1 and V3 can both flag expectedVsActual)
-    var unique = errors.filter(function (e, i, a) { return a.indexOf(e) === i; });
-
-    var result = {
-      validationStatus: unique.length === 0 ? 'PASS' : 'FAIL',
-      validationErrors: unique
-    };
-    bp26_logValidationAttempt(result); // BP26-SPEC-20260401-02 — log every attempt
-    return result;
-  };
-
-  // ─── UI UPDATE ───────────────────────────────────────────────
-  window.bp26_updateValidationUI = function (result) {
-    var panel      = document.getElementById('validationPanel');
-    var statusBar  = document.getElementById('vpStatusBar');
-    var errorList  = document.getElementById('vpErrorList');
-    var correction = document.getElementById('vpCorrectionNote');
-    var submitBtn  = document.getElementById('submitBtn');
-    var confPanel  = document.getElementById('scoreOverridePanel');
-    var passPanel  = document.getElementById('passScoringSection');
-
-    window.bp26_validationState = result;
-
-    var isPASS = result.validationStatus === 'PASS';
-
-    panel.classList.toggle('vp-pass', isPASS);
-    panel.querySelector('h3').textContent = isPASS
-      ? '✅ Validation Layer v1.1 — PASSED'
-      : '⚙ Validation Layer v1.1 — Framework Enforcement Gate';
-
-    statusBar.style.display = 'block';
-    statusBar.className = isPASS ? 'vp-status-pass' : 'vp-status-fail';
-    statusBar.textContent = isPASS
-      ? '✅ VALIDATION PASSED — Confidence scoring unlocked'
-      : '❌ VALIDATION FAILED — ' + result.validationErrors.length + ' error(s)';
-
-    errorList.innerHTML = '';
-    result.validationErrors.forEach(function (err) {
-      var li = document.createElement('li');
-      li.textContent = err;
-      errorList.appendChild(li);
+    var seen = {};
+    errors = errors.filter(function(e) {
+      var key = e.slice(0, 3);
+      if (seen[key]) return false;
+      seen[key] = true;
+      return true;
     });
 
-    correction.style.display = isPASS ? 'none' : 'block';
+    return errors;
+  }
 
-    submitBtn.disabled      = !isPASS;
-    submitBtn.style.opacity = isPASS ? '1' : '0.4';
-    submitBtn.style.cursor  = isPASS ? 'pointer' : 'not-allowed';
-    submitBtn.title         = isPASS ? '' : 'Validation must PASS before saving';
+  /* ── VALIDATION UI ─────────────────────────────────────── */
 
-    [confPanel, passPanel].forEach(function (el) {
-      if (!el) return;
-      if (isPASS) {
-        el.classList.remove('confidence-gate-overlay');
-        el.querySelectorAll('input, select, textarea, button').forEach(function (f) {
-          f.disabled = false;
-        });
-      } else {
-        el.classList.add('confidence-gate-overlay');
-        el.querySelectorAll('input, select, textarea, button').forEach(function (f) {
-          f.disabled = true;
-        });
+  function bp26_renderValidationResult(errors) {
+    var panel = document.getElementById('validationPanel');
+    var statusBar = document.getElementById('vpStatusBar');
+    var errorList = document.getElementById('vpErrorList');
+    var corrNote = document.getElementById('vpCorrectionNote');
+    var h3 = panel ? panel.querySelector('h3') : null;
+
+    if (!panel || !statusBar || !errorList) return;
+
+    if (errors.length === 0) {
+      panel.classList.add('vp-pass');
+      statusBar.className = 'vp-status-pass';
+      statusBar.textContent = '✓ VALIDATION PASSED — All framework rules satisfied';
+      statusBar.style.display = 'block';
+      errorList.innerHTML = '';
+      if (corrNote) corrNote.style.display = 'none';
+      if (h3) h3.textContent = '✓ Validation Layer v1.2 — PASSED';
+    } else {
+      panel.classList.remove('vp-pass');
+      statusBar.className = 'vp-status-fail';
+      statusBar.textContent = '✗ VALIDATION FAILED — ' + errors.length + ' error' + (errors.length > 1 ? 's' : '') + ' found';
+      statusBar.style.display = 'block';
+      errorList.innerHTML = errors.map(function(e) {
+        return '<li>' + e + '</li>';
+      }).join('');
+      if (corrNote) corrNote.style.display = 'block';
+      if (h3) h3.textContent = '⚙ Validation Layer v1.2 — Framework Enforcement Gate';
+    }
+
+    bp26_updateValidationAnalytics(errors);
+  }
+
+  /* ── ANALYTICS — PATCH 9 applied ─────────────────────── */
+
+  function bp26_updateValidationAnalytics(errors) {
+    // PATCH 9a: V8b added to ruleCounts
+    var ruleCounts = { V1:0, V2:0, V3:0, V4:0, V5:0, V6:0, V7:0, V8:0, 'V8b':0 };
+
+    errors.forEach(function(err) {
+      // PATCH 9b: regex fixed — was /^(V[1-6])/ now handles V7, V8, V8b
+      var match = err.match(/^(V\d+[a-z]*)/);
+      if (match && ruleCounts.hasOwnProperty(match[1])) {
+        ruleCounts[match[1]]++;
       }
     });
-  };
 
-  // ─── RESET ───────────────────────────────────────────────────
-  // Schema keys consistent: validationStatus / validationErrors
-  window.bp26_resetValidation = function () {
-    window.bp26_validationState = {
-      validationStatus: null,
-      validationErrors: []
-    };
+    // PATCH 9c: topRule array includes V8, V8b
+    var topRule = ['V1','V2','V3','V4','V5','V6','V7','V8','V8b'].sort(function (a, b) {
+      return (ruleCounts[b] || 0) - (ruleCounts[a] || 0);
+    })[0];
 
-    var panel      = document.getElementById('validationPanel');
-    var statusBar  = document.getElementById('vpStatusBar');
-    var errorList  = document.getElementById('vpErrorList');
-    var correction = document.getElementById('vpCorrectionNote');
-    var submitBtn  = document.getElementById('submitBtn');
-    var confPanel  = document.getElementById('scoreOverridePanel');
-    var passPanel  = document.getElementById('passScoringSection');
-
-    panel.classList.remove('vp-pass');
-    panel.querySelector('h3').textContent = '⚙ Validation Layer v1.1 — Framework Enforcement Gate';
-    statusBar.style.display  = 'none';
-    statusBar.className      = '';
-    statusBar.textContent    = '';
-    errorList.innerHTML      = '';
-    correction.style.display = 'none';
-
-    submitBtn.disabled      = true;
-    submitBtn.style.opacity = '0.4';
-    submitBtn.style.cursor  = 'not-allowed';
-    submitBtn.title         = 'Validation must PASS before saving';
-
-    [confPanel, passPanel].forEach(function (el) {
-      if (!el) return;
-      el.classList.add('confidence-gate-overlay');
-      el.querySelectorAll('input, select, textarea, button').forEach(function (f) {
-        f.disabled = true;
-      });
-    });
-  };
-
-  // ─── FIELD CHANGE HANDLER ────────────────────────────────────
-  window.bp26_onFieldChange = function () {
-    if (window.bp26_validationState.validationStatus === 'PASS') {
-      window.bp26_resetValidation();
-    }
-  };
-
-  // ─── SUBMIT GATE + FIELD INJECTION ───────────────────────────
-  // Wraps existing submitEntry(). Does NOT replace it.
-  // Field injection is explicit here — no Storage.prototype override.
-  var _origSubmitEntry = window.submitEntry;
-  window.submitEntry = function () {
-
-    // Final gate — re-run at save time
-    var result = window.bp26_runValidation();
-    if (result.validationStatus !== 'PASS') {
-      window.bp26_updateValidationUI(result);
-      document.getElementById('validationPanel').scrollIntoView({
-        behavior: 'smooth',
-        block: 'center'
-      });
-      return; // BLOCK
-    }
-
-    // Snapshot ledger count before save
-    var ledgerBefore = JSON.parse(localStorage.getItem('bp26:ledger') || '[]');
-    var countBefore  = ledgerBefore.length;
-
-    // Run original save
-    _origSubmitEntry.apply(this, arguments);
-
-    // Find new entry and inject validation + framework fields
-    var ledgerAfter = JSON.parse(localStorage.getItem('bp26:ledger') || '[]');
-    if (ledgerAfter.length > countBefore) {
-      var newEntry = ledgerAfter[ledgerAfter.length - 1];
-      if (newEntry && newEntry.validationStatus === undefined) {
-        var state = window.bp26_validationState;
-        // Default is 'FAIL' — never 'UNKNOWN'
-        newEntry.validationStatus     = state.validationStatus  || 'FAIL';
-        newEntry.validationErrors     = state.validationErrors  || [];
-        newEntry.asymmetry            = (document.getElementById('val_asymmetry')        || {}).value || '';
-        newEntry.mechanism            = (document.getElementById('val_mechanism')        || {}).value || '';
-        newEntry.expectedVsActualMove = (document.getElementById('val_expectedVsActual') || {}).value || '';
-        newEntry.confirmation         = (document.getElementById('val_confirmation')     || {}).value || '';
-        localStorage.setItem('bp26:ledger', JSON.stringify(ledgerAfter));
-      }
-    }
-  };
-
-  // ─── DOM READY — INIT ────────────────────────────────────────
-  document.addEventListener('DOMContentLoaded', function () {
-
-    // Initial state — blocked until validation passes
-    window.bp26_resetValidation();
-
-    // Validate button
-    document.getElementById('vpValidateBtn').addEventListener('click', function () {
-      var result = window.bp26_runValidation();
-      window.bp26_updateValidationUI(result);
+    // PATCH 9d: forEach array includes V8, V8b
+    ['V1','V2','V3','V4','V5','V6','V7','V8','V8b'].forEach(function (rule) {
+      var el = document.getElementById('vp_rule_' + rule.replace('b','b'));
+      if (el) el.textContent = ruleCounts[rule];
     });
 
-    // Field change listeners — reset if any watched field changes after PASS
-    var watchedIds = [
-      'signalWhat', 'signalWhy', 'signalInvalidates',
-      'preGameNotes', 'postGameNotes', 'failureDetail',
-      'val_asymmetry', 'val_mechanism', 'val_expectedVsActual',
-      'val_confirmation', 'val_cvs'
-    ];
-    watchedIds.forEach(function (id) {
+    try {
+      var logKey = 'bp26:validationLog';
+      var existing = [];
+      try { existing = JSON.parse(localStorage.getItem(logKey) || '[]'); } catch(e2) {}
+      existing.push({
+        ts: new Date().toISOString(),
+        errorCount: errors.length,
+        rules: Object.keys(ruleCounts).filter(function(k){ return ruleCounts[k] > 0; }),
+        topRule: errors.length > 0 ? topRule : null
+      });
+      if (existing.length > 500) existing = existing.slice(-500);
+      localStorage.setItem(logKey, JSON.stringify(existing));
+    } catch(e3) {}
+  }
+
+  /* ── WATCHED IDS — PATCH 7 applied ───────────────────── */
+
+  var watchedIds = [
+    'decisionType',
+    'betType', 'selection', 'odds',
+    'openSpreadNum', 'currentSpreadNum',
+    'openTotalNum', 'currentTotalNum',
+    'lateMarketStatus', 'passReason',
+    'val_asymmetry', 'val_mechanism', 'val_expectedVsActual',
+    'val_confirmation', 'val_cvs',
+    'bigSteamState', 'conditionalSignalStatus', 'signalEnvironmentTags'
+  ];
+
+  /* ── EVENT BINDING ─────────────────────────────────────── */
+
+  function bp26_bindWatchers() {
+    watchedIds.forEach(function(id) {
       var el = document.getElementById(id);
       if (!el) return;
-      var evt = el.type === 'checkbox' ? 'change' : 'input';
-      el.addEventListener(evt, window.bp26_onFieldChange);
+      var evt = (el.type === 'checkbox') ? 'change' : 'input';
+      el.addEventListener(evt, function() {
+        var panel = document.getElementById('validationPanel');
+        if (panel) panel.classList.remove('vp-pass');
+        var statusBar = document.getElementById('vpStatusBar');
+        if (statusBar) statusBar.style.display = 'none';
+        var errorList = document.getElementById('vpErrorList');
+        if (errorList) errorList.innerHTML = '';
+        var corrNote = document.getElementById('vpCorrectionNote');
+        if (corrNote) corrNote.style.display = 'none';
+        var h3 = panel ? panel.querySelector('h3') : null;
+        if (h3) h3.textContent = '⚙ Validation Layer v1.2 — Framework Enforcement Gate';
+      });
     });
 
-    // decisionType radios
-    document.querySelectorAll('input[name="decisionType"]').forEach(function (radio) {
-      radio.addEventListener('change', window.bp26_onFieldChange);
+    // Radio buttons for decisionType
+    document.querySelectorAll('input[name="decisionType"]').forEach(function(radio) {
+      radio.addEventListener('change', function() {
+        var panel = document.getElementById('validationPanel');
+        if (panel) panel.classList.remove('vp-pass');
+        var statusBar = document.getElementById('vpStatusBar');
+        if (statusBar) statusBar.style.display = 'none';
+      });
     });
+  }
 
-  });
+  function bp26_bindValidateButton() {
+    var btn = document.getElementById('vpValidateBtn');
+    if (!btn) return;
+    btn.addEventListener('click', function() {
+      var errors = bp26_runValidation();
+      bp26_renderValidationResult(errors);
+    });
+  }
 
-  // ─── VALIDATION ANALYTICS — BP26-SPEC-20260401-02 ───────────
-  // Passive observational layer. Logs every validation attempt.
-  // Does NOT affect validation, confidence, or save flow.
+  /* ── INIT ─────────────────────────────────────────────── */
 
-  window.bp26_logValidationAttempt = function (result) {
-    try {
-      var log = JSON.parse(localStorage.getItem('bp26:validationLog') || '[]');
-      if (!Array.isArray(log)) log = [];
+  function bp26_initValidation() {
+    bp26_bindValidateButton();
+    bp26_bindWatchers();
+  }
 
-      var away = (document.getElementById('awayTeam') || {}).value || '';
-      var home = (document.getElementById('homeTeam') || {}).value || '';
-      var game = (away && home) ? away + ' @ ' + home : '';
-
-      log.push({
-        timestamp:        new Date().toISOString(),
-        validationStatus: result.validationStatus,
-        errors:           result.validationErrors || [],
-        decisionType:     (document.querySelector('input[name="decisionType"]:checked') || {}).value || '',
-        game:             game
-      });
-
-      // FIFO cap — keep newest 500
-      if (log.length > 500) {
-        log = log.slice(log.length - 500);
-      }
-
-      localStorage.setItem('bp26:validationLog', JSON.stringify(log));
-    } catch (e) {
-      // Silent failure — never affects validation
-    }
-  };
-
-  window.bp26_printValidationStats = function () {
-    try {
-      var log = JSON.parse(localStorage.getItem('bp26:validationLog') || '[]');
-      if (!log.length) {
-        console.log('[BP26] No validation attempts logged yet.');
-        return;
-      }
-
-      var total    = log.length;
-      var passes   = log.filter(function (e) { return e.validationStatus === 'PASS'; }).length;
-      var passRate = ((passes / total) * 100).toFixed(1);
-
-      var ruleCounts = { V1:0, V2:0, V3:0, V4:0, V5:0, V6:0, V7:0 };
-      log.forEach(function (entry) {
-        (entry.errors || []).forEach(function (err) {
-          var match = err.match(/^(V[1-6])/);
-          if (match) ruleCounts[match[1]] = (ruleCounts[match[1]] || 0) + 1;
-        });
-      });
-
-      var topRule = ['V1','V2','V3','V4','V5','V6','V7'].sort(function (a, b) {
-        return ruleCounts[b] - ruleCounts[a];
-      })[0];
-
-      console.log('=== BP26 VALIDATION ANALYTICS ===');
-      console.log('Total attempts : ' + total);
-      console.log('Pass rate      : ' + passRate + '% (' + passes + '/' + total + ')');
-      console.log('Most common    : ' + (ruleCounts[topRule] > 0 ? topRule + ' (' + ruleCounts[topRule] + ' hits)' : 'none'));
-      console.log('--- Rule breakdown ---');
-      ['V1','V2','V3','V4','V5','V6','V7'].forEach(function (rule) {
-        console.log(rule + '           : ' + (ruleCounts[rule] || 0));
-      });
-      console.log('=================================');
-    } catch (e) {
-      console.log('[BP26] Could not read validation log: ' + e.message);
-    }
-  };
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', bp26_initValidation);
+  } else {
+    bp26_initValidation();
+  }
 
 })();
+
+/* END BP26 VALIDATION LAYER v1.2 */
 </script>
-<!-- END BP26 VALIDATION LAYER v1.1 JS -->
+
 </body>
 </html>
