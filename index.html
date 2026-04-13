@@ -774,7 +774,7 @@
     <div class="inject-area">
       <textarea id="injectInput" placeholder="Paste JSON entry here..."></textarea>
       <div class="btn-row">
-        <button class="btn btn-primary" id="injectBtn" onclick="runInject()" disabled>Inject Entry</button>
+        <button class="btn btn-primary" id="injectBtn" onclick="runInject()">Inject Entry</button>
         <button class="btn btn-secondary" onclick="loadTemplate()">Load Blank Template</button>
       </div>
       <div class="inject-status" id="injectStatus"></div>
@@ -1572,6 +1572,9 @@ document.addEventListener('DOMContentLoaded', () => {
   if (INJECT_SUSPENDED) {
     document.getElementById('suspendBanner').style.display = '';
     document.getElementById('injectBtn').disabled = true;
+  } else {
+    document.getElementById('suspendBanner').style.display = 'none';
+    document.getElementById('injectBtn').disabled = false;
   }
   // Wire validation on key inputs
   document.querySelectorAll('#page-form input, #page-form select, #page-form textarea').forEach(el => {
