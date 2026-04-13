@@ -234,6 +234,15 @@
           <label>Home Team <span class="req-marker">*</span></label>
           <input type="text" id="f_homeTeam" placeholder="e.g. POR">
         </div>
+        <div class="field-group">
+          <label>Season Phase <span class="req-marker">*</span></label>
+          <select id="f_seasonPhase">
+            <option value="">— Select —</option>
+            <option value="REGULAR_SEASON">REGULAR_SEASON</option>
+            <option value="PLAY_IN">PLAY_IN</option>
+            <option value="PLAYOFFS">PLAYOFFS</option>
+          </select>
+        </div>
       </div>
     </div>
 
@@ -983,6 +992,7 @@ function validateForm() {
   if (!document.getElementById('f_matchup').value) errors.push('V1: matchup is required');
   if (!dt) errors.push('V1: decisionType is required');
   if (!document.getElementById('f_liveMoneyFlag').value) errors.push('V1: liveMoneyFlag is required');
+  if (!document.getElementById('f_seasonPhase').value) errors.push('V1: seasonPhase is required');
 
   // SIM/BET specific
   if (['SIM','BET'].includes(dt)) {
@@ -1228,6 +1238,7 @@ function readForm() {
     matchup: g('f_matchup'),
     awayTeam: g('f_awayTeam'),
     homeTeam: g('f_homeTeam'),
+    seasonPhase: sel('f_seasonPhase'),
     decisionType: g('f_decisionType'),
     liveMoneyFlag: g('f_liveMoneyFlag'),
     decisionAt: new Date().toISOString(),
@@ -1789,7 +1800,7 @@ function loadTemplate() {
     .then(t => { document.getElementById('injectInput').value = JSON.stringify(t, null, 2); })
     .catch(() => {
       // Inline fallback template
-      const template = {"betId":"BP26-YYYYMMDD-NNN","date":"YYYY-MM-DD","tipOffTime":"HH:MM","matchup":"AWAY @ HOME","awayTeam":"","homeTeam":"","decisionType":"","liveMoneyFlag":"","stake":0};
+      const template = {"betId":"BP26-YYYYMMDD-NNN","date":"YYYY-MM-DD","tipOffTime":"HH:MM","matchup":"AWAY @ HOME","awayTeam":"","homeTeam":"","seasonPhase":"","decisionType":"","liveMoneyFlag":"","stake":0};
       document.getElementById('injectInput').value = JSON.stringify(template, null, 2);
     });
 }
@@ -1827,6 +1838,7 @@ function runInject() {
   if (!entry.matchup) injectErrors.push('matchup is required');
   if (!entry.decisionType) injectErrors.push('decisionType is required');
   if (!entry.liveMoneyFlag) injectErrors.push('liveMoneyFlag is required');
+  if (!entry.seasonPhase) injectErrors.push('seasonPhase is required');
   if (['SIM','BET'].includes(entry.decisionType)) {
     if (!entry.moveType) injectErrors.push('moveType required for SIM/BET');
     if (!entry.moveSpeed) injectErrors.push('moveSpeed required for SIM/BET');
@@ -1916,7 +1928,7 @@ function exportLedger() {
 }
 
 function exportTemplate() {
-  const t = {"_note":"BP26 Injection Template vNext — SPEC-20260409-02","betId":"BP26-YYYYMMDD-NNN","date":"YYYY-MM-DD","tipOffTime":"HH:MM","matchup":"AWAY @ HOME","awayTeam":"","homeTeam":"","decisionType":"","liveMoneyFlag":"","decisionAt":null,"betType":null,"selection":null,"odds":null,"stake":0,"openSpreadTeam":null,"openSpreadNum":null,"currentSpreadTeam":null,"currentSpreadNum":null,"spreadMove":null,"openTotalNum":null,"currentTotalNum":null,"totalMove":null,"publicSide":null,"publicBetPct":null,"publicMoneyPct":null,"publicSignalType":null,"moveType":null,"moveSpeed":null,"multiBook":null,"sharpBookLeading":null,"lateMarketStatus":null,"moveDetectedAt":null,"movePhase":null,"observedAfterMove":null,"sharpConfirmed":null,"lineMoveSize":null,"siiFlag":null,"slateInflationIndex":null,"slateConsensusDirection":null,"bigSteamState":null,"conditionalSignalStatus":null,"signalEnvironmentTags":[],"injuryClass":null,"injuryPlayers":null,"depletionAsymmetry":null,"multiPlayerAbsence":null,"multiPlayerReturn":null,"opposingSwing":null,"signalOrigin":null,"signalClassificationTag":null,"signalWhat":null,"signalWhy":null,"signalInvalidates":null,"partialConfirmationType":null,"expectedVsActualMove":null,"dkOpenOdds":null,"currentOddsS03":null,"notes":null,"result":null,"finalScore":null,"closingSpread":null,"closingTotal":null,"totalResult":null,"clvSpread":null,"clvTotal":null,"netPnL":null,"invalidationHappened":null,"invalidationType":null,"learningNote":null,"postGameNotes":null,"processTag":null,"failureMode":null,"failureDetail":null,"varianceFlag":null};
+  const t = {"_note":"BP26 Injection Template vNext — SPEC-20260409-02","betId":"BP26-YYYYMMDD-NNN","date":"YYYY-MM-DD","tipOffTime":"HH:MM","matchup":"AWAY @ HOME","awayTeam":"","homeTeam":"","seasonPhase":null,"decisionType":"","liveMoneyFlag":"","decisionAt":null,"betType":null,"selection":null,"odds":null,"stake":0,"openSpreadTeam":null,"openSpreadNum":null,"currentSpreadTeam":null,"currentSpreadNum":null,"spreadMove":null,"openTotalNum":null,"currentTotalNum":null,"totalMove":null,"publicSide":null,"publicBetPct":null,"publicMoneyPct":null,"publicSignalType":null,"moveType":null,"moveSpeed":null,"multiBook":null,"sharpBookLeading":null,"lateMarketStatus":null,"moveDetectedAt":null,"movePhase":null,"observedAfterMove":null,"sharpConfirmed":null,"lineMoveSize":null,"siiFlag":null,"slateInflationIndex":null,"slateConsensusDirection":null,"bigSteamState":null,"conditionalSignalStatus":null,"signalEnvironmentTags":[],"injuryClass":null,"injuryPlayers":null,"depletionAsymmetry":null,"multiPlayerAbsence":null,"multiPlayerReturn":null,"opposingSwing":null,"signalOrigin":null,"signalClassificationTag":null,"signalWhat":null,"signalWhy":null,"signalInvalidates":null,"partialConfirmationType":null,"expectedVsActualMove":null,"dkOpenOdds":null,"currentOddsS03":null,"notes":null,"result":null,"finalScore":null,"closingSpread":null,"closingTotal":null,"totalResult":null,"clvSpread":null,"clvTotal":null,"netPnL":null,"invalidationHappened":null,"invalidationType":null,"learningNote":null,"postGameNotes":null,"processTag":null,"failureMode":null,"failureDetail":null,"varianceFlag":null};
   const blob = new Blob([JSON.stringify(t, null, 2)], { type: 'application/json' });
   const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
   a.download = 'BP26_INJECTION_TEMPLATE_vNext.json'; a.click();
